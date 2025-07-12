@@ -4,14 +4,43 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 
+#include "custom_colors.h" // colori custom
+
 // STYLING
 
-    void style() {
-        ImGuiStyle& style = ImGui::GetStyle();
-        style.FrameRounding = 20.0f;
-        style.Colors[ImGuiCol_Button] = ImVec4(193.0f/255,60.0f/255,60.0f/255,255.0f/255);
-    };
+void style() {
+    ImGuiStyle& style = ImGui::GetStyle();
+    style.FrameRounding = 20.0f;
+    style.Colors[ImGuiCol_Button] = ImVec4(193.0f/255,60.0f/255,60.0f/255,255.0f/255);
+};
 
+const std::string username = "admin";
+const std::string password = "password";
+
+void RenderLoginForm() {
+    static char username_input[64] = ""; 
+    static char password_input[64] = "";
+    static bool login_success = false;
+    static bool login_failed = false;
+    ImGui::Begin("Simple Login Form");
+
+    ImGui::InputText("username", username_input, IM_ARRAYSIZE(username_input));
+    ImGui::InputText("password", password_input, IM_ARRAYSIZE(password_input), ImGuiInputTextFlags_Password);
+
+    if(ImGui::Button("Login")) {
+        if (username_input == username && password_input == password) {
+            login_success = true;
+            login_failed = false;
+        } else {
+            login_success = false;
+            login_failed = true;
+        }
+    }
+    if (login_success) {
+        ImGui::TextColored(ImVec4(0,1,0,1), "Login Successful");
+    } else ImGui::TextColored(ImVec4(1,0,0,1), "Login Failed");
+    ImGui::End();
+}
 
 int main() {
     // Inizializza GLFW
@@ -45,6 +74,7 @@ int main() {
     ImGui_ImplOpenGL3_Init("#version 130");
 
     // Variabili del progetto
+    bool minimize_and_exit_window = true;
     bool show_demo_window = false;
     bool show_my_window = false;
     bool window1 = true;
@@ -58,7 +88,8 @@ int main() {
     float my_float = 0.0f;
     int my_int = 0;
 
-    style(); 
+    // style();
+    
     // Loop principale
     while (!glfwWindowShouldClose(window)) {
         glfwPollEvents();
@@ -67,7 +98,7 @@ int main() {
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
-
+        RenderLoginForm();
         // La tua UI qui
         if (show_my_window) {
             ImGui::Begin("Il Mio Progetto", &show_my_window);
@@ -87,21 +118,42 @@ int main() {
             
             ImGui::End();
         }
+        //! ///////////////////////////////////////////////////////////
+        //! MINIMIZE AND EXIT WINDOW //////////////////////////////////
+        //! ///////////////////////////////////////////////////////////
+        float minimize_and_exit_window_length = ImGui::GetWindowContentRegionMax().x;
+        float minimize_and_exit_window_heigth = 20.0f;
+        ImGui::SetNextWindowSize(ImVec2(minimize_and_exit_window_length,minimize_and_exit_window_heigth));
+        if (minimize_and_exit_window) {
+            ImGui::Begin("##minimize_and_exit_window_id", &minimize_and_exit_window);
+            ImGui::SetCursorPos(ImVec2(ImGui::GetWindowWidth() - ImGui::CalcTextSize("- X").x -10, 23)); 
+            ImGui::Text("-");
+            if (ImGui::IsItemHovered) {
+                ImGui::PushStyleColor(ImGuiCol_Text, rosso);
+                ImGui::Text("-");
+                ImGui::PopStyleColor();
+            }
+            if (ImGui::IsItemClicked()) {
+                glfwHideWindow(window);
+            }
+            ImGui::SameLine();
+            ImGui::Text("X");
+            if (ImGui::IsItemClicked()) {
+                exit(0);
+            }
+                
+        } ImGui::End();
+        //! ///////////////////////////////////////////////////////////
+
 //*  /////////////////////////////////////////////////// Window1 ////////////////////////////////////
         
-        // ImVec2 window1_vec2; // creo un vettore per setNextWindowsSize per dirgli le misure ma basta semplicemente mettere 
-        // // come argomento a SetNextWindowSize(ImVec2(x,y))
-        // window1_vec2.x = 400;
-        // window1_vec2.y = 600;
-
-        // un altro modo per inizializzare un ImVec2 è
-        // ImVec2 a = {200, 300};
-        ImGui::SetNextWindowSize(ImVec2(600,400));
+        ImGui::SetNextWindowSize(ImVec2(600,400)); //£ MEMO 2
         if (window1) {
             ImGui::Begin("Window1", &window1);
 
             if (ImGui::Button("My button", ImVec2(100,100))) {
                 // tutto quello in questo if verrà eseguito quando il bottone sarà premuto
+                ImGui::Text("You pressed the button");
             }
             bool checkBoxValue = true;
             ImGui::Checkbox("CheckBox", &checkBoxValue);
@@ -115,6 +167,8 @@ int main() {
             ImGui::End();
         }
 
+        
+
         // Demo window (opzionale)
         if (show_demo_window)
             ImGui::ShowDemoWindow(&show_demo_window);
@@ -127,7 +181,7 @@ int main() {
 
             // Checkbox
             static bool checkbox = false;
-            ImGui::Checkbox("Attiva funzione", &checkbox);
+            ImGui::Checkbox("Attiva checkbox", &checkbox);
 
             // Radio buttons
             static int radio = 0;
@@ -153,7 +207,7 @@ int main() {
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
         glfwSwapBuffers(window);
-    }
+    } // fine while principale
 
     // Cleanup
     ImGui_ImplOpenGL3_Shutdown();

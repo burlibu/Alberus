@@ -1,10 +1,10 @@
 # Makefile per progetto ImGui
 CXX = g++
 CXXFLAGS = -std=c++11 -Wall -Wextra -g
-INCLUDES = -Iinclude -Iexternal/imgui -Iexternal/imgui/backends
+INCLUDES = -Iinclude -Iexternal/imgui -Iexternal/imgui/backends -Iassets
 
 # File sorgente del tuo progetto
-PROJECT_SOURCES = src/main.cpp
+PROJECT_SOURCES = src/main.cpp src/custom_colors.cpp
 
 # File sorgente di Dear ImGui
 IMGUI_SOURCES = external/imgui/imgui.cpp \
