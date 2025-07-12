@@ -3,6 +3,7 @@
 #include "imgui_impl_opengl3.h"
 #include <GLFW/glfw3.h>
 #include <iostream>
+#include <sstream>
 
 #include "custom_colors.h" // colori custom
 #include "functions.h"
@@ -39,4 +40,28 @@ void RenderLoginForm() {
         ImGui::TextColored(ImVec4(0,1,0,1), "Login Successful");
     } else ImGui::TextColored(ImVec4(1,0,0,1), "Login Failed");
     ImGui::End();
+}
+
+// Funzione che prende una stringa colore come bde0fe o bde0fe80 e ritorna un ImVec4 corrispettivo
+// Supporta stringhe da 6 o 8 caratteri
+ImVec4 hexToImVec4(const std::string& hex) {
+    std::string h = hex;
+    if (h[0] == '#') h = h.substr(1);
+    if (h.length() != 6 && h.length() != 8) return ImVec4(1,1,1,1); // fallback bianco
+    unsigned int r, g, b, a = 255;
+    std::stringstream ss;
+    ss << std::hex << h.substr(0,2);
+    ss >> r;
+    ss.clear(); ss.str("");
+    ss << std::hex << h.substr(2,2);
+    ss >> g;
+    ss.clear(); ss.str("");
+    ss << std::hex << h.substr(4,2);
+    ss >> b;
+    if (h.length() == 8) {
+        ss.clear(); ss.str("");
+        ss << std::hex << h.substr(6,2);
+        ss >> a;
+    }
+    return ImVec4(r/255.0f, g/255.0f, b/255.0f, a/255.0f);
 }

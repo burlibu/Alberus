@@ -146,8 +146,9 @@ int main() {
         
 
         // Demo window (opzionale)
-        if (show_demo_window)
+        if (show_demo_window) {
             ImGui::ShowDemoWindow(&show_demo_window);
+        }
         if (esperimenti_window) {
             ImGui::Begin("Esperimenti");
 
