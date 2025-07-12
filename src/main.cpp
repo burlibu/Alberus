@@ -4,8 +4,10 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 
-#include "custom_colors.h" // colori custom
-#include "functions.h" // funzioni 
+#include "env.h"
+#include "settings.h"
+#include "functions.h"
+#include "custom_colors.h"
 
 int main() {
     // Inizializza GLFW
@@ -179,7 +181,7 @@ int main() {
         int display_w, display_h;
         glfwGetFramebufferSize(window, &display_w, &display_h);
         glViewport(0, 0, display_w, display_h);
-        glClearColor(0.45f, 0.55f, 0.60f, 1.00f);
+        glClearColor(blu.x,blu.y,blu.z, blu.w);
         glClear(GL_COLOR_BUFFER_BIT);
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 

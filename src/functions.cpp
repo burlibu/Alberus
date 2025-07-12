@@ -5,8 +5,11 @@
 #include <iostream>
 #include <sstream>
 
-#include "custom_colors.h" // colori custom
+#include "env.h"
+#include "settings.h"
 #include "functions.h"
+#include "custom_colors.h"
+
 
 void style() {
     ImGuiStyle& style = ImGui::GetStyle();
@@ -65,3 +68,4 @@ ImVec4 hexToImVec4(const std::string& hex) {
     }
     return ImVec4(r/255.0f, g/255.0f, b/255.0f, a/255.0f);
 }
+

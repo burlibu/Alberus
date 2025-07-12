@@ -4,7 +4,10 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 
-#include "custom_colors.h" // colori custom
+#include "env.h"
+#include "settings.h"
+
+#include "custom_colors.h"
 
 // Funzione per creare stile personalizzaro
 void style();

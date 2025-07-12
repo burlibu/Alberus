@@ -5,5 +5,6 @@
 #include <iostream>
 #include <sstream>
 
-#include "custom_colors.h" // colori custom
-#include "functions.h"
+#include "env.h"
+
+const std::string version = "1.0.1";

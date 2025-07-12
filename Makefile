@@ -4,7 +4,7 @@ CXXFLAGS = -std=c++11 -Wall -Wextra -g
 INCLUDES = -Iinclude -Iexternal/imgui -Iexternal/imgui/backends -Iassets 
 
 # File sorgente del tuo progetto
-PROJECT_SOURCES = src/main.cpp src/custom_colors.cpp src/functions.cpp
+PROJECT_SOURCES = src/main.cpp src/custom_colors.cpp src/env.cpp src/settings.cpp src/functions.cpp 
 
 # File sorgente di Dear ImGui
 IMGUI_SOURCES = external/imgui/imgui.cpp \

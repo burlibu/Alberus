@@ -3,8 +3,5 @@
 #include "imgui_impl_opengl3.h"
 #include <GLFW/glfw3.h>
 #include <iostream>
-#include <sstream>
 
-
-#define APP_VERSION "1.0.1"
-extern const std::string version;
+#include "env.h"
