@@ -40,9 +40,10 @@ int main() {
 
     //^ /////////////////////////////////////////////// Variabili del progetto ///////////////////////////////////////////////
     bool minimize_and_exit_window = true;
-    bool show_demo_window = false;
-    bool show_my_window = false;
-    bool window1 = false;
+    bool show_demo_window         = false;
+    bool show_my_window           = false;
+    bool window1                  = false;
+    bool showRenderLoginForm      = false;
     // Impostazioni Window 1 
     float value1 = 0.1f;
     int value2 = 1;
@@ -63,10 +64,10 @@ int main() {
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
-        RenderLoginForm();
+        if (showRenderLoginForm) RenderLoginForm();
         // La tua UI qui
         if (show_my_window) {
-            ImGui::Begin("Il Mio Progetto", &show_my_window);
+            ImGui::Begin("Alberus [Cariddi#1]", &show_my_window);
             
             ImGui::Text("Benvenuto nel mio progetto ImGui!");
             ImGui::Separator();
