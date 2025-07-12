@@ -13,3 +13,6 @@ my_imgui_app
 # OS files
 .DS_Store
 Thumbs.db
+
+# Compiled files
+alberus
