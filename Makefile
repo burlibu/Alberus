@@ -21,7 +21,7 @@ BACKEND_SOURCES = external/imgui/backends/imgui_impl_glfw.cpp \
 SOURCES = $(PROJECT_SOURCES) $(IMGUI_SOURCES) $(BACKEND_SOURCES)
 
 # Nome dell'eseguibile
-EXE = my_imgui_app
+EXE = alberus
 
 # Librerie necessarie
 LIBS = -lGL $(shell pkg-config --static --libs glfw3)
