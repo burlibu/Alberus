@@ -5,42 +5,7 @@
 #include <iostream>
 
 #include "custom_colors.h" // colori custom
-
-// STYLING
-
-void style() {
-    ImGuiStyle& style = ImGui::GetStyle();
-    style.FrameRounding = 20.0f;
-    style.Colors[ImGuiCol_Button] = ImVec4(193.0f/255,60.0f/255,60.0f/255,255.0f/255);
-};
-
-const std::string username = "admin";
-const std::string password = "password";
-
-void RenderLoginForm() {
-    static char username_input[64] = ""; 
-    static char password_input[64] = "";
-    static bool login_success = false;
-    static bool login_failed = false;
-    ImGui::Begin("Simple Login Form");
-
-    ImGui::InputText("username", username_input, IM_ARRAYSIZE(username_input));
-    ImGui::InputText("password", password_input, IM_ARRAYSIZE(password_input), ImGuiInputTextFlags_Password);
-
-    if(ImGui::Button("Login")) {
-        if (username_input == username && password_input == password) {
-            login_success = true;
-            login_failed = false;
-        } else {
-            login_success = false;
-            login_failed = true;
-        }
-    }
-    if (login_success) {
-        ImGui::TextColored(ImVec4(0,1,0,1), "Login Successful");
-    } else ImGui::TextColored(ImVec4(1,0,0,1), "Login Failed");
-    ImGui::End();
-}
+#include "functions.h" // funzioni 
 
 int main() {
     // Inizializza GLFW
@@ -73,11 +38,11 @@ int main() {
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init("#version 130");
 
-    // Variabili del progetto
+    //^ /////////////////////////////////////////////// Variabili del progetto ///////////////////////////////////////////////
     bool minimize_and_exit_window = true;
     bool show_demo_window = false;
     bool show_my_window = false;
-    bool window1 = true;
+    bool window1 = false;
     // Impostazioni Window 1 
     float value1 = 0.1f;
     int value2 = 1;
@@ -88,7 +53,7 @@ int main() {
     float my_float = 0.0f;
     int my_int = 0;
 
-    // style();
+    //^ /////////////////////////////////////////////// Variabili del progetto ///////////////////////////////////////////////
     
     // Loop principale
     while (!glfwWindowShouldClose(window)) {
@@ -121,28 +86,33 @@ int main() {
         //! ///////////////////////////////////////////////////////////
         //! MINIMIZE AND EXIT WINDOW //////////////////////////////////
         //! ///////////////////////////////////////////////////////////
-        float minimize_and_exit_window_length = ImGui::GetWindowContentRegionMax().x;
-        float minimize_and_exit_window_heigth = 20.0f;
-        ImGui::SetNextWindowSize(ImVec2(minimize_and_exit_window_length,minimize_and_exit_window_heigth));
+        // Ottieni dimensioni finestra principale
+        int minimize_and_exit_window_w, minimize_and_exit_window_h;
+        glfwGetFramebufferSize(window, &minimize_and_exit_window_w, &minimize_and_exit_window_h);
+        float bar_height = 28.0f;
+        ImGui::SetNextWindowPos(ImVec2(0, 0));
+        ImGui::SetNextWindowSize(ImVec2((float)minimize_and_exit_window_w, bar_height));
+        ImGuiWindowFlags bar_flags = ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoFocusOnAppearing | ImGuiWindowFlags_NoNav;
         if (minimize_and_exit_window) {
-            ImGui::Begin("##minimize_and_exit_window_id", &minimize_and_exit_window);
-            ImGui::SetCursorPos(ImVec2(ImGui::GetWindowWidth() - ImGui::CalcTextSize("- X").x -10, 23)); 
-            ImGui::Text("-");
-            if (ImGui::IsItemHovered) {
-                ImGui::PushStyleColor(ImGuiCol_Text, rosso);
-                ImGui::Text("-");
-                ImGui::PopStyleColor();
-            }
-            if (ImGui::IsItemClicked()) {
+            ImGui::Begin("##minimize_and_exit_window_id", &minimize_and_exit_window, bar_flags);
+            // Bottoni a sinistra
+            ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(6, 4));
+            // Bottone Minimize
+            ImGui::PushStyleColor(ImGuiCol_Text, ImGui::IsItemHovered() ? rosso : ImGui::GetStyle().Colors[ImGuiCol_Text]);
+            if (ImGui::Button("-")) {
                 glfwHideWindow(window);
             }
+            ImGui::PopStyleColor();
             ImGui::SameLine();
-            ImGui::Text("X");
-            if (ImGui::IsItemClicked()) {
+            // Bottone Exit
+            ImGui::PushStyleColor(ImGuiCol_Text, ImGui::IsItemHovered() ? rosso : ImGui::GetStyle().Colors[ImGuiCol_Text]);
+            if (ImGui::Button("X")) {
                 exit(0);
             }
-                
-        } ImGui::End();
+            ImGui::PopStyleColor();
+            ImGui::PopStyleVar();
+            ImGui::End();
+        }
         //! ///////////////////////////////////////////////////////////
 
 //*  /////////////////////////////////////////////////// Window1 ////////////////////////////////////
