@@ -1,0 +1,15 @@
+# Build files
+build/
+*.o
+*.exe
+my_imgui_app
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
