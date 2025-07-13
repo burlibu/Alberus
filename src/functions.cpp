@@ -25,8 +25,7 @@ struct Notification {
 
 std::vector<Notification> notifications; // creazione vector di notifiche
 
-// Funzione che crea una notifica dai parametri ma non la mostra. la aggiunge al vector di notifiche
-// TODO cambiarla in modo da renderla utile per renderNotifications
+
 void showNotification(const std::string& title, const std::string& text, int duration_ms) {
     Notification notification;
     notification.title = title;

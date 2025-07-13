@@ -10,4 +10,4 @@
 //src
 #include "env.h"
 
-const std::string version = "1.0.1";
+const std::string version = "1.0.2";

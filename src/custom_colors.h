@@ -9,6 +9,8 @@ extern const ImVec4 verde_giada;
 extern const ImVec4 ciano;
 extern const ImVec4 crema;
 extern const ImVec4 blu;
+extern const ImVec4 bianco;
+
 
 
 

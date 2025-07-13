@@ -93,8 +93,8 @@ int main() {
         //! ///////////////////////////////////////////////////////////
         //! MINIMIZE AND EXIT WINDOW //////////////////////////////////
         //! ///////////////////////////////////////////////////////////
-        // Ottieni dimensioni finestra principale
 
+        // Ottieni dimensioni finestra principale
         int minimize_and_exit_window_w, minimize_and_exit_window_h;
         glfwGetFramebufferSize(window, &minimize_and_exit_window_w, &minimize_and_exit_window_h);
         float bar_height = 30.0f;
@@ -108,7 +108,7 @@ int main() {
             ImGui::SetCursorPosX(minimize_and_exit_window_w - ImGui::CalcTextSize("- X").x - 30); // calcolo per metterli a destra
             // Bottone Minimize
             ImGui::PushStyleColor(ImGuiCol_ButtonHovered, arancione); // hover arancione
-            ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1,1,1,1)); // testo bianco
+            ImGui::PushStyleColor(ImGuiCol_Text, bianco); // testo bianco
             if (ImGui::Button("-")) {
                 glfwHideWindow(window);
             }

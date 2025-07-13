@@ -16,4 +16,5 @@ const ImVec4 verde_giada = hexToImVec4("70e000");
 const ImVec4 ciano = hexToImVec4("124559");
 const ImVec4 crema = hexToImVec4("fdf0d5");
 const ImVec4 blu = hexToImVec4("003566");
+const ImVec4 bianco = ImVec4(1,1,1,1);
 
