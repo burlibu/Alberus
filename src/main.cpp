@@ -1,9 +1,13 @@
+//standards
+#include <iostream>
+#include <thread>
+#include <vector>
+//imgui
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
 #include <GLFW/glfw3.h>
-#include <iostream>
-
+//src
 #include "env.h"
 #include "settings.h"
 #include "functions.h"
@@ -40,23 +44,23 @@ int main() {
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init("#version 130");
 
-    //^ /////////////////////////////////////////////// Variabili del progetto ///////////////////////////////////////////////
-    bool minimize_and_exit_window = true;
-    bool show_demo_window         = false;
-    bool show_my_window           = false;
-    bool window1                  = false;
-    bool showRenderLoginForm      = false;
-    // Impostazioni Window 1 
-    float value1 = 0.1f;
-    int value2 = 1;
-    const char* items[] = {"item1", "item2", "item3"};
-    int current = 0;
-    //
-    bool esperimenti_window = false;
-    float my_float = 0.0f;
-    int my_int = 0;
+    // //^ /////////////////////////////////////////////// Variabili del progetto ///////////////////////////////////////////////
+    // bool minimize_and_exit_window = true;
+    // bool show_demo_window         = false;
+    // bool show_my_window           = false;
+    // bool window1                  = false;
+    // bool showRenderLoginForm      = false;
+    // // Impostazioni Window 1 
+    // float value1 = 0.1f;
+    // int value2 = 1;
+    // const char* items[] = {"item1", "item2", "item3"};
+    // int current = 0;
+    // //
+    // bool esperimenti_window = false;
+    // float my_float = 0.0f;
+    // int my_int = 0;
 
-    //^ /////////////////////////////////////////////// Variabili del progetto ///////////////////////////////////////////////
+    // //^ /////////////////////////////////////////////// Variabili del progetto ///////////////////////////////////////////////
     
     // Loop principale
     while (!glfwWindowShouldClose(window)) {
@@ -138,7 +142,7 @@ int main() {
 
             ImGui::SliderFloat("My Float Slider", &value1, 0.0f, 100.0f);
 
-            ImGui::Combo("##id1", &current, items, IM_ARRAYSIZE(items));
+            ImGui::Combo("##id1", &current, items.data(), items.size());
             ImGui::SetCursorPosX(ImGui::GetWindowWidth()/2 - ImGui::CalcTextSize("This is some text").x/2);
             ImGui::Text("This is some text");
 
