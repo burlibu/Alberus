@@ -11,3 +11,4 @@
 #include "env.h"
 
 const std::string version = APP_VERSION;
+extern const bool DEBUG = true; 

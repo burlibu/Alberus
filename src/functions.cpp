@@ -147,13 +147,41 @@ namespace Math {
     }
 }
 
+    
+    std::string ImVec2_to_string(const ImVec2& vector ) {
+        std::string out = "";
+        out += vector.x;
+        return out;
+    }
+
+    bool checkWindowSizeChange(const ImVec2& currentSize, float checkIntervalSeconds) {
+    static ImVec2 lastSize = ImVec2(0, 0);
+    static auto lastCheckTime = std::chrono::steady_clock::now();
+    
+    auto currentTime = std::chrono::steady_clock::now();
+    auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - lastCheckTime);
+    
+    if (elapsed.count() >= checkIntervalSeconds * 1000) {
+        if (currentSize.x != lastSize.x || currentSize.y != lastSize.y) {
+            std::cout << "Window size changed! width: " << currentSize.x 
+                      << " height: " << currentSize.y << std::endl;
+            lastSize = currentSize;
+            lastCheckTime = currentTime;
+            return true; // Dimensione cambiata
+        }
+        lastCheckTime = currentTime;
+    }
+    return false; // Nessun cambiamento o timer non scaduto
+}
 namespace Windows {
     
-    void RenderLoginForm() {
+    void RenderLoginForm(const ImVec2& window_pos, const ImVec2& window_size) {
+    ImGui::SetNextWindowSize(window_size);
+    ImGui::SetNextWindowPos(window_pos);
     static char username_input[64] = ""; 
     static char password_input[64] = "";
     static bool login_success = false;
-    ImGui::Begin("Simple Login Form");
+    ImGui::Begin("Simple Login Form", &showRenderLoginForm, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoResize |ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoSavedSettings); //MEMO7
 
     ImGui::InputText("username", username_input, IM_ARRAYSIZE(username_input));
     ImGui::InputText("password", password_input, IM_ARRAYSIZE(password_input), ImGuiInputTextFlags_Password);
@@ -166,6 +194,35 @@ namespace Windows {
     if (login_success) {
         ImGui::TextColored(verde_giada, "Login Successful");
     } else ImGui::TextColored(rosso, "Login Failed");
+    if (DEBUG) {
+        checkWindowSizeChange(window_size);
+    }
     ImGui::End();
-}
-}
+    }
+
+    void showMyWindow(const ImVec2& window_pos, const ImVec2& window_size) {
+        ImGui::SetNextWindowSize(window_size);
+        ImGui::SetNextWindowPos(window_pos);
+        ImGui::Begin("Alberus [Cariddi#1]", &show_my_window);
+        ImGui::Text("Benvenuto nel mio progetto ImGui!");
+        ImGui::Separator();
+        
+        ImGui::SliderFloat("Float Value", &my_float, 0.0f, 1.0f);
+        ImGui::SliderInt("Int Value", &my_int, 0, 100);
+        
+        if (ImGui::Button("Click Me!")) {
+            std::cout << "Bottone cliccato!" << std::endl;
+        }
+        
+        ImGui::SameLine();
+        ImGui::Text("Counter: %d", my_int);
+        
+        ImGui::End();
+
+        if (DEBUG) {
+        checkWindowSizeChange(window_size);
+        }
+    }
+
+
+} // fine namespace Windows

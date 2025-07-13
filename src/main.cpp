@@ -21,7 +21,7 @@ int main() {
     }
 
     // Crea la finestra
-    GLFWwindow* window = glfwCreateWindow(1280, 720, "Il Mio Progetto ImGui", nullptr, nullptr);
+    GLFWwindow* window = glfwCreateWindow(1280, 720, "Alberus Project", nullptr, nullptr);
     if (!window) {
         std::cerr << "Errore nella creazione della finestra" << std::endl;
         glfwTerminate();
@@ -44,25 +44,8 @@ int main() {
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init("#version 130");
 
-    // //^ /////////////////////////////////////////////// Variabili del progetto ///////////////////////////////////////////////
-    // bool minimize_and_exit_window = true;
-    // bool show_demo_window         = false;
-    // bool show_my_window           = false;
-    // bool window1                  = false;
-    // bool showRenderLoginForm      = false;
-    // // Impostazioni Window 1 
-    // float value1 = 0.1f;
-    // int value2 = 1;
-    // const char* items[] = {"item1", "item2", "item3"};
-    // int current = 0;
-    // //
-    // bool esperimenti_window = false;
-    // float my_float = 0.0f;
-    // int my_int = 0;
 
-    // //^ /////////////////////////////////////////////// Variabili del progetto ///////////////////////////////////////////////
-    
-    // Loop principale
+    //* /////////////////////////////////////////////////////////// Loop principale ///////////////////////////////////////////////////////
     while (!glfwWindowShouldClose(window)) {
         glfwPollEvents();
 
@@ -70,25 +53,20 @@ int main() {
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
-        if (showRenderLoginForm) Windows::RenderLoginForm();
+    //^ ///////////////////////////////////////////////////////// Render Login Form //////////////////////////////////////////////////////
+        ImVec2 renderLoginFormWindowPos = {100, 100}; // TODO da togliere quando si ha un sistema
+        ImVec2 renderLoginFormSize = {500,400};  // TODO da togliere quando si ha un sistema
+        if (showRenderLoginForm) {
+            // bool RenderLoginFormFirstTimePos = true;
+            // bool RenderLoginFormFirstTimeSize = true;
+        Windows::RenderLoginForm(renderLoginFormWindowPos, renderLoginFormSize);
+        }
+    //^ //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // La tua UI qui
+        ImVec2 renderLoginFormWindowPosMyWindow = {100, 100}; // TODO da togliere quando si ha un sistema
+        ImVec2 renderLoginFormSizeMyWindow = {500,400};  // TODO da togliere quando si ha un sistema
         if (show_my_window) {
-            ImGui::Begin("Alberus [Cariddi#1]", &show_my_window);
-            
-            ImGui::Text("Benvenuto nel mio progetto ImGui!");
-            ImGui::Separator();
-            
-            ImGui::SliderFloat("Float Value", &my_float, 0.0f, 1.0f);
-            ImGui::SliderInt("Int Value", &my_int, 0, 100);
-            
-            if (ImGui::Button("Click Me!")) {
-                std::cout << "Bottone cliccato!" << std::endl;
-            }
-            
-            ImGui::SameLine();
-            ImGui::Text("Counter: %d", my_int);
-            
-            ImGui::End();
+            Windows::showMyWindow(renderLoginFormWindowPosMyWindow, renderLoginFormSizeMyWindow);
         }
         //! ///////////////////////////////////////////////////////////
         //! MINIMIZE AND EXIT WINDOW //////////////////////////////////
@@ -145,10 +123,9 @@ int main() {
             ImGui::Combo("##id1", &current, items.data(), items.size());
             ImGui::SetCursorPosX(ImGui::GetWindowWidth()/2 - ImGui::CalcTextSize("This is some text").x/2);
             ImGui::Text("This is some text");
-
             ImGui::End();
         }
-
+//* /////////////////////////////////////////////////////////////////////////////////////////////////////
         
 
         // Demo window (opzionale)

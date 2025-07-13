@@ -25,8 +25,16 @@ namespace Math {
 }
 
 namespace Windows {
-    // Funzione modulo: Window Login Form
-    void RenderLoginForm();
+    /**
+     *  Parameters:
+     * 
+     * `const ImVec2& cursorpos` posizione del cursore dove sarà l' angolo alto sinistro della schermata
+     * `const ImVec2& window_size` larghezza e altezza in un imvec2
+     * Attenzione: chiama checkWindowSize se DEBUG è attivo
+     */
+    void RenderLoginForm(const ImVec2& window_pos, const ImVec2& window_size);
+
+    void showMyWindow(const ImVec2& window_pos, const ImVec2& window_size);
 }
 
 /**
@@ -259,7 +267,11 @@ void HardLoad();
 int lavoro_lungo();
 
 void esempio_future();
+/**
+ * Prende un ImVec2 e lo trasforma in una stringa per esempio (200, 300) diventa "200, 300" 
+ */
+std::string ImVec2_to_string(const ImVec2& vector );
 
-
+bool checkWindowSizeChange(const ImVec2& currentSize, float checkIntervalSeconds = 5.0f);
 
 

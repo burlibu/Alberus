@@ -12,9 +12,9 @@
 
 bool minimize_and_exit_window = true;
 bool show_demo_window         = false;
-bool show_my_window           = false;
+bool show_my_window           = true;
 bool window1                  = false;
-bool showRenderLoginForm      = false;
+bool showRenderLoginForm      = true;
 
 // Impostazioni Window 1 
 float value1 =  0.1f;
