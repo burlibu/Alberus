@@ -70,7 +70,7 @@ int main() {
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
-        if (showRenderLoginForm) RenderLoginForm();
+        if (showRenderLoginForm) Windows::RenderLoginForm();
         // La tua UI qui
         if (show_my_window) {
             ImGui::Begin("Alberus [Cariddi#1]", &show_my_window);

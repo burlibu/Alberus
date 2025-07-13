@@ -14,13 +14,83 @@
 #include "settings.h"
 
 #include "custom_colors.h"
+
+namespace Math {
+    /**
+ * @brief Funzione che calcola il fattoriale 
+ * @param[in] n numero intero per calcolo fattoriale >= 0
+ * @return  `res` numero intero risultato del calcolo
+ */
+    unsigned int fact(unsigned int n);
+}
+
+namespace Windows {
+    // Funzione modulo: Window Login Form
+    void RenderLoginForm();
+}
+
+/**
+ * 
+ * 
+ * @note 
+ *   
+ * `const AppSettings settings("App", 800, 600);`
+ * 
+ * `settings.getWidth();     // ✅ OK (metodo const)`
+ * 
+ * `settings.setWidth(500); // ❌ ERRORE (oggetto const, metodo non const)`
+ */
+class AppSettings {
+    private:
+        std::string appName; // Nascosto, solo la classe può accedere
+        int windowWidth; // Nascosto, solo la classe può accedere
+        int windowHeigth; // Nascosto, solo la classe può accedere
+    public:
+    /**
+     * @brief Costruttore della classe
+     * @param name Nome dell'applicazione
+     * @param width Larghezza finestra
+     * @param height Altezza finestra
+     */
+    AppSettings(const std::string& name, int width, int height);
+    
+    /**
+     * @brief Imposta le dimensioni della finestra
+     * @param width Larghezza
+     * @param height Altezza
+     */
+    void setWindowSize(int width, int height);
+    
+    /**
+     * @brief Ottiene la larghezza della finestra
+     * @return Larghezza corrente
+     */
+    int getWidth() const; // quando const è scritto dopo il metodo significa che questo metodo non modifica l' oggetto
+};
+
+enum class NotificationType {
+    INFO,    ///< Notifica informativa
+    WARNING, ///< Notifica di avvertimento
+    ERROR,   ///< Notifica di errore
+    SUCCESS  ///< Notifica di successo
+};
+
 /**
  * @brief struct Notifiche
+ *
+ * `std::string title;` Titolo
  * 
+ *  `std::string text;` text inside
+ * 
+ *  `float duration;` duration
+ * 
+ *  `std::chrono::steady_clock::time_point start_time;` duration time displays
  */
 struct Notification;
-
-// Funzione per creare stile personalizzaro
+/**
+ * @brief Function to create a personalized style
+ * 
+ */
 void style();
 /*! @brief Mostra una notifica temporanea nell'interfaccia.
  * 
@@ -49,13 +119,17 @@ void style();
  *  @ingroup notifications
  */
 void showNotification(); //MEMO6
-// Funzione modulo: Window Login Form
-void RenderLoginForm();
 
-// Funzione che prende una stringa colore come bde0fe o bde0fe80 e ritorna un ImVec4 corrispettivo
-// Supporta stringhe da 6 o 8 caratteri
+/**
+ * @brief Funzione che prende una stringa colore come bde0fe o bde0fe80 e ritorna un ImVec4 corrispettivo 
+ * @param[in] n numero intero per calcolo fattoriale >= 0
+ * @return  `res` numero intero risultato del calcolo
+ * @note Supporta stringhe da 6 o 8 caratteri
+ */
 ImVec4 hexToImVec4(const std::string& hex);
-
+/**
+ * @brief Funzione che disegna un rettangolo che si illumina
+ */
 void DrawGlowingRectangle();
 
 /*! @brief Esegue un carico di lavoro intensivo simulato.
@@ -185,4 +259,7 @@ void HardLoad();
 int lavoro_lungo();
 
 void esempio_future();
+
+
+
 

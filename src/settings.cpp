@@ -17,7 +17,7 @@ bool window1                  = false;
 bool showRenderLoginForm      = false;
 
 // Impostazioni Window 1 
-float value1 = 0.1f;
+float value1 =  0.1f;
 int value2 = 1;
 std::vector<const char*> items = {"item1", "item2", "item3"};
 int current = 0;

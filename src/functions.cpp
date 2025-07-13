@@ -58,8 +58,6 @@ void RenderNotifications() {
     }
 }
 
-// Funzione per impostare gli stili
-// TODO completarla
 void style() {
     ImGuiStyle& style = ImGui::GetStyle();
     style.FrameRounding = 20.0f;
@@ -69,25 +67,7 @@ void style() {
 const std::string username = "admin";
 const std::string password = "password";
 
-void RenderLoginForm() {
-    static char username_input[64] = ""; 
-    static char password_input[64] = "";
-    static bool login_success = false;
-    ImGui::Begin("Simple Login Form");
 
-    ImGui::InputText("username", username_input, IM_ARRAYSIZE(username_input));
-    ImGui::InputText("password", password_input, IM_ARRAYSIZE(password_input), ImGuiInputTextFlags_Password);
-
-    if(ImGui::Button("Login")) {
-        if (username_input == username && password_input == password) {
-            login_success = true;
-        } 
-    }
-    if (login_success) {
-        ImGui::TextColored(verde_giada, "Login Successful");
-    } else ImGui::TextColored(rosso, "Login Failed");
-    ImGui::End();
-}
 
 
 ImVec4 hexToImVec4(const std::string& hex) {
@@ -158,4 +138,34 @@ void esempio_future() {
     // Quando ti serve il risultato:
     int valore = risultato.get(); // attende che il thread finisca
     std::cout << "Risultato: " << valore << std::endl;
+}
+
+namespace Math {
+    unsigned int fact(unsigned int n) {
+        if (n == 1 | n == 0) return 1;
+        return n * fact(n-1);
+    }
+}
+
+namespace Windows {
+    
+    void RenderLoginForm() {
+    static char username_input[64] = ""; 
+    static char password_input[64] = "";
+    static bool login_success = false;
+    ImGui::Begin("Simple Login Form");
+
+    ImGui::InputText("username", username_input, IM_ARRAYSIZE(username_input));
+    ImGui::InputText("password", password_input, IM_ARRAYSIZE(password_input), ImGuiInputTextFlags_Password);
+
+    if(ImGui::Button("Login")) {
+        if (username_input == username && password_input == password) {
+            login_success = true;
+        } 
+    }
+    if (login_success) {
+        ImGui::TextColored(verde_giada, "Login Successful");
+    } else ImGui::TextColored(rosso, "Login Failed");
+    ImGui::End();
+}
 }
