@@ -148,32 +148,32 @@ namespace Math {
 }
 
     
-    std::string ImVec2_to_string(const ImVec2& vector ) {
-        std::string out = "";
-        out += vector.x;
-        return out;
-    }
-
-    bool checkWindowSizeChange(const ImVec2& currentSize, float checkIntervalSeconds) {
-    static ImVec2 lastSize = ImVec2(0, 0);
-    static auto lastCheckTime = std::chrono::steady_clock::now();
-    
-    auto currentTime = std::chrono::steady_clock::now();
-    auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - lastCheckTime);
-    
-    if (elapsed.count() >= checkIntervalSeconds * 1000) {
-        if (currentSize.x != lastSize.x || currentSize.y != lastSize.y) {
-            std::cout << "Window size changed! width: " << currentSize.x 
-                      << " height: " << currentSize.y << std::endl;
-            lastSize = currentSize;
-            lastCheckTime = currentTime;
-            return true; // Dimensione cambiata
-        }
-        lastCheckTime = currentTime;
-    }
-    return false; // Nessun cambiamento o timer non scaduto
+std::string ImVec2_to_string(const ImVec2& vector ) {
+    std::string out = "";
+    out += vector.x;
+    return out;
 }
-namespace Windows {
+
+bool checkWindowSizeChange(const ImVec2& currentSize, float checkIntervalSeconds) {
+static ImVec2 lastSize = ImVec2(0, 0);
+static auto lastCheckTime = std::chrono::steady_clock::now();
+
+auto currentTime = std::chrono::steady_clock::now();
+auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - lastCheckTime);
+
+if (elapsed.count() >= checkIntervalSeconds * 1000) {
+    if (currentSize.x != lastSize.x || currentSize.y != lastSize.y) {
+        std::cout << "Window size changed! width: " << currentSize.x 
+                    << " height: " << currentSize.y << std::endl;
+        lastSize = currentSize;
+        lastCheckTime = currentTime;
+        return true; // Dimensione cambiata
+    }
+    lastCheckTime = currentTime;
+}
+return false; // Nessun cambiamento o timer non scaduto
+}
+
     
     void RenderLoginForm(const ImVec2& window_pos, const ImVec2& window_size) {
     ImGui::SetNextWindowSize(window_size);
@@ -225,4 +225,3 @@ namespace Windows {
     }
 
 
-} // fine namespace Windows
