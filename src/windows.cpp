@@ -15,27 +15,70 @@
 #include "windows.h"
 
 namespace Gui {
-    LoginWindow::LoginWindow(ImVec2 p, ImVec2 s) // inizializzazione costruttore Window
-        : Window("Login", p, s) {}
+    //^ LoginWindow ////////////////////////////////////////////////////////////////////////////////////////////////////
+    LoginWindow::LoginWindow(ImVec2 position, ImVec2 size) // inizializzazione costruttore Window
+        : Window("Login", position, size) {} // gli sta passandro questi parametri
 
+    /**
+     *  Parameters:
+     * 
+     * `const ImVec2& cursorpos` posizione del cursore dove sarà l' angolo alto sinistro della schermata
+     * `const ImVec2& window_size` larghezza e altezza in un imvec2
+     * Attenzione: chiama checkWindowSize se DEBUG è attivo
+     */
     void LoginWindow::Render() {
         ImGui::SetNextWindowPos(pos, ImGuiCond_FirstUseEver);
         ImGui::SetNextWindowSize(size, ImGuiCond_FirstUseEver);
-        if (ImGui::Begin(title.c_str(), &isOpen)) {
+        if (ImGui::Begin(title.c_str(), &isOpen, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoResize |ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoSavedSettings)) {
             ImGui::InputText("Username", username, IM_ARRAYSIZE(username));
             ImGui::InputText("Password", password, IM_ARRAYSIZE(password), ImGuiInputTextFlags_Password);
             if (ImGui::Button("Login")) {
                 if (std::string(username) == "admin" && std::string(password) == "password") {
                     login_success = true;
-                    login_failed = false;
                 } else {
                     login_success = false;
-                    login_failed = true;
                 }
             }
             if (login_success) ImGui::TextColored(ImVec4(0,1,0,1), "Login Successful");
-            if (login_failed) ImGui::TextColored(ImVec4(1,0,0,1), "Login Failed");
+            if (!login_success) ImGui::TextColored(ImVec4(1,0,0,1), "Login Failed");
         }
         ImGui::End();
     } // fine funzione Render
+    //^ ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    //& ShowMyWindow /////////////////////////////////////////////////////////////////////////////////////////////////////
+    ShowMyWindow::ShowMyWindow(ImVec2 position, ImVec2 size) 
+        : Window("My window", position, size) {}
+    /**
+     *  Parameters:
+     * 
+     * `const ImVec2& cursorpos` posizione del cursore dove sarà l' angolo alto sinistro della schermata
+     * `const ImVec2& window_size` larghezza e altezza in un imvec2
+     * Attenzione: chiama checkWindowSize se DEBUG è attivo
+     */
+    void ShowMyWindow::Render() {
+        ImGui::SetNextWindowPos(pos, ImGuiCond_FirstUseEver);
+        ImGui::SetNextWindowSize(size, ImGuiCond_FirstUseEver);
+        ImGui::Begin("Alberus [Cariddi#1]", &isOpen);
+        ImGui::Text("Benvenuto nel mio progetto ImGui!");
+        ImGui::Separator();
+        
+        ImGui::SliderFloat("Float Value", &my_float, 0.0f, 1.0f);
+        ImGui::SliderInt("Int Value", &my_int, 0, 100);
+        
+        if (ImGui::Button("Click Me!")) {
+            std::cout << "Bottone cliccato!" << std::endl;
+        }
+        
+        ImGui::SameLine();
+        ImGui::Text("Counter: %d", my_int);
+        
+        ImGui::End();
+
+        if (DEBUG) {
+        checkWindowSizeChange(size);
+        }
+    }
+    //& //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }

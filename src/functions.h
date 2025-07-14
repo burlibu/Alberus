@@ -1,3 +1,4 @@
+#pragma once
 //standards
 #include <iostream>
 #include <thread>
@@ -24,83 +25,14 @@ namespace Math {
     unsigned int fact(unsigned int n);
 }
 
-namespace Windows {
-    /**
-     *  Parameters:
-     * 
-     * `const ImVec2& cursorpos` posizione del cursore dove sarà l' angolo alto sinistro della schermata
-     * `const ImVec2& window_size` larghezza e altezza in un imvec2
-     * Attenzione: chiama checkWindowSize se DEBUG è attivo
-     */
-    void RenderLoginForm(const ImVec2& window_pos, const ImVec2& window_size);
 
-    void showMyWindow(const ImVec2& window_pos, const ImVec2& window_size);
-}
-
-/**
- * 
- * 
- * @note 
- *   
- * `const AppSettings settings("App", 800, 600);`
- * 
- * `settings.getWidth();     // ✅ OK (metodo const)`
- * 
- * `settings.setWidth(500); // ❌ ERRORE (oggetto const, metodo non const)`
- */
-class AppSettings {
-    private:
-        std::string appName; // Nascosto, solo la classe può accedere
-        int windowWidth; // Nascosto, solo la classe può accedere
-        int windowHeigth; // Nascosto, solo la classe può accedere
-    public:
-    /**
-     * @brief Costruttore della classe
-     * @param name Nome dell'applicazione
-     * @param width Larghezza finestra
-     * @param height Altezza finestra
-     */
-    AppSettings(const std::string& name, int width, int height);
-    
-    /**
-     * @brief Imposta le dimensioni della finestra
-     * @param width Larghezza
-     * @param height Altezza
-     */
-    void setWindowSize(int width, int height);
-    
-    /**
-     * @brief Ottiene la larghezza della finestra
-     * @return Larghezza corrente
-     */
-    int getWidth() const; // quando const è scritto dopo il metodo significa che questo metodo non modifica l' oggetto
-};
-
-enum class NotificationType {
-    INFO,    ///< Notifica informativa
-    WARNING, ///< Notifica di avvertimento
-    ERROR,   ///< Notifica di errore
-    SUCCESS  ///< Notifica di successo
-};
-
-/**
- * @brief struct Notifiche
- *
- * `std::string title;` Titolo
- * 
- *  `std::string text;` text inside
- * 
- *  `float duration;` duration
- * 
- *  `std::chrono::steady_clock::time_point start_time;` duration time displays
- */
-struct Notification;
 /**
  * @brief Function to create a personalized style
  * 
  */
 void style();
-/*! @brief Mostra una notifica temporanea nell'interfaccia.
+/*! 
+@brief Mostra una notifica temporanea nell'interfaccia.
  * 
  *  Questa funzione crea una notifica che apparirà nell'interfaccia per un tempo
  *  specificato. La notifica verrà automaticamente rimossa dopo la scadenza del
@@ -271,7 +203,14 @@ void esempio_future();
  * Prende un ImVec2 e lo trasforma in una stringa per esempio (200, 300) diventa "200, 300" 
  */
 std::string ImVec2_to_string(const ImVec2& vector );
-
+// TODO documentare
 bool checkWindowSizeChange(const ImVec2& currentSize, float checkIntervalSeconds = 5.0f);
 
 
+enum class NotificationType {
+    INFO,    ///< Notifica informativa
+    WARNING, ///< Notifica di avvertimento
+    ERROR,   ///< Notifica di errore
+    SUCCESS  ///< Notifica di successo
+};
+struct Notification;

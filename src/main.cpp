@@ -46,6 +46,9 @@ int main() {
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init("#version 130");
 
+    Gui::LoginWindow loginWin(ImVec2(100, 100), ImVec2(500, 400));
+    Gui::ShowMyWindow mywin(ImVec2(100, 100), ImVec2(500, 400)); // classe loginWindow creata
+     // classe loginWindow creata
 
     //* /////////////////////////////////////////////////////////// Loop principale ///////////////////////////////////////////////////////
     while (!glfwWindowShouldClose(window)) {
@@ -59,9 +62,7 @@ int main() {
         ImVec2 renderLoginFormWindowPos = {100, 100}; // TODO da togliere quando si ha un sistema
         ImVec2 renderLoginFormSize = {500,400};  // TODO da togliere quando si ha un sistema
         if (showRenderLoginForm) {
-            // bool RenderLoginFormFirstTimePos = true;
-            // bool RenderLoginFormFirstTimeSize = true;
-        Windows::RenderLoginForm(renderLoginFormWindowPos, renderLoginFormSize);
+        loginWin.Render();
         }
     //^ //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // La tua UI qui
@@ -69,7 +70,7 @@ int main() {
         ImVec2 renderLoginFormWindowPosMyWindow = {600, 100}; // TODO da togliere quando si ha un sistema
         ImVec2 renderLoginFormSizeMyWindow = {500,400};  // TODO da togliere quando si ha un sistema
         if (show_my_window) {
-            Windows::showMyWindow(renderLoginFormWindowPosMyWindow, renderLoginFormSizeMyWindow);
+            mywin.Render();
         }
     //£ /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //! ///////////////////////////////////////////////////////////
