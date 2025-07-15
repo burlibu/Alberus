@@ -24,12 +24,12 @@ protected:
     bool isOpen;
 
 public:
-    Window(const std::string& t, ImVec2 p, ImVec2 s)
-        : title(t), pos(p), size(s), isOpen(true) {}
-
-    virtual ~Window() = default; // distruttore virtuale che garantisce distruzione nella gerarchia
-
-    virtual void Render() = 0; // Funzione virtuale pura: ogni finestra la implementa
+    Window(const std::string& t, ImVec2 p, ImVec2 s) : title(t), pos(p), size(s), isOpen(true) {}
+        
+    // distruttore virtuale che garantisce corretta distruzione nella gerarchia
+    virtual ~Window() = default; 
+    // Funzione virtuale pura: ogni finestra la implementa
+    virtual void Render() = 0; 
 
     void SetPos(const ImVec2& p) {
         pos = p; 
@@ -52,6 +52,7 @@ private:
     char password[64] = "";
     bool login_success = false;
     bool login_failed = false;
+    
 
 public:
     LoginWindow(ImVec2 p, ImVec2 s); // costruttore della classe
@@ -65,6 +66,7 @@ public:
 class ShowMyWindow : public Window {
 public:
     ShowMyWindow(ImVec2 p, ImVec2 s); //il costruttore deve avere lo stesso nome della classe
+    unsigned int count = 0; // counter del bottone clickMe
     void Render() override;
 };
 //& //////////////////////////////////////////////////////////////////////////////////////////////////////////////////

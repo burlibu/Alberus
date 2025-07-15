@@ -12,12 +12,12 @@
 #include "settings.h"
 #include "functions.h"
 #include "custom_colors.h"
-#include "windows.h"
+#include "gui.h"
 
 namespace Gui {
     //^ LoginWindow ////////////////////////////////////////////////////////////////////////////////////////////////////
     LoginWindow::LoginWindow(ImVec2 position, ImVec2 size) // inizializzazione costruttore Window
-        : Window("Login", position, size) {} // gli sta passandro questi parametri
+        : Window("Login", position, size) {} // gli sta passando questi parametri
 
     /**
      *  Parameters:
@@ -47,7 +47,7 @@ namespace Gui {
     //^ ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-    //& ShowMyWindow /////////////////////////////////////////////////////////////////////////////////////////////////////
+    //& ShowMyWindow //////////////////////////////////////////////////////////////////////////////////////////////////////
     ShowMyWindow::ShowMyWindow(ImVec2 position, ImVec2 size) 
         : Window("My window", position, size) {}
     /**
@@ -69,10 +69,11 @@ namespace Gui {
         
         if (ImGui::Button("Click Me!")) {
             std::cout << "Bottone cliccato!" << std::endl;
+            count++;
         }
         
         ImGui::SameLine();
-        ImGui::Text("Counter: %d", my_int);
+        ImGui::Text("Counter: %d", count);
         
         ImGui::End();
 
