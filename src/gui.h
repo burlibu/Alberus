@@ -41,8 +41,6 @@ public:
 
 private:
     GLFWwindow* frame_window = nullptr;
-    
-
 };
 
 class Window { // inizio class Window
@@ -51,11 +49,13 @@ protected:
     ImVec2 pos;
     ImVec2 size;
     bool isOpen;
+    ImGuiWindowFlags flags;
     
 
 public:
-    Window(const std::string& t, ImVec2 p, ImVec2 s, GLFWwindow* win)
-        : title(t), pos(p), size(s), isOpen(true), window_ptr(win) {}
+    // Modifica il costruttore per accettare anche i flags (con default opzionale)
+    Window(const std::string& t, ImVec2 p, ImVec2 s, GLFWwindow* win, ImGuiWindowFlags f = 0)
+        : title(t), pos(p), size(s), isOpen(true), flags(f), window_ptr(win)  {}
         
     // distruttore virtuale che garantisce corretta distruzione nella gerarchia
     virtual ~Window() = default; 
@@ -111,11 +111,9 @@ class SettingsWindow : public Window {
 //! ///////////////////////////////////////////Minimize and exit window ///////////////////////////////////////////////
 class MinimizeAndExitWindow : public Window {
 public:
-    MinimizeAndExitWindow(ImVec2 p, ImVec2 s, GLFWwindow* win); // costruttore
+    MinimizeAndExitWindow(ImVec2 p, ImVec2 s, GLFWwindow* win, ImGuiWindowFlags f); // costruttore
     void Render() override;
     float bar_height = 30.0f;
-    ImGuiWindowFlags bar_flags = ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoScrollbar 
-    | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoFocusOnAppearing 
-    | ImGuiWindowFlags_NoNav;
+    
 }; // fine classe minimize and exit window
 } // fine namespace Gui

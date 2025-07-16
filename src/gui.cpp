@@ -125,29 +125,36 @@ namespace Gui {
         ImGui::End();
 
         if (DEBUG) {
-        checkWindowSizeChange(size);
+        
         }
     }
     //& //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //! /////////////////////////////////////Minimize and exit window ////////////////////////////////////////////////////
-    MinimizeAndExitWindow::MinimizeAndExitWindow(ImVec2 position, ImVec2 size, GLFWwindow* win) 
-        : Window("MinimizeAndExitWindow", position, size, win) {};
+    MinimizeAndExitWindow::MinimizeAndExitWindow(ImVec2 position, ImVec2 size, GLFWwindow* win, ImGuiWindowFlags f) 
+        : Window("MinimizeAndExitWindow", position, size, win, f) {};
 
     void MinimizeAndExitWindow::Render() {
-        // Inizializzazione
-        ImGui::SetNextWindowPos(pos, ImGuiCond_FirstUseEver);
-        ImGui::SetNextWindowSize(size, ImGuiCond_FirstUseEver);
-        ImGui::Begin("minimize_and_exit_window_id", &isOpen, bar_flags);
+        // Aggiorna la larghezza della barra in base alla finestra principale
+        int width, height;
+        glfwGetFramebufferSize(window_ptr, &width, &height);
+        size.x = width; // aggiorna la larghezza della barra
+        // Mantieni la posizione sempre in alto a sinistra
+        pos = ImVec2(0, 0);
+
+        ImGui::SetNextWindowPos(pos, ImGuiCond_Always);
+        ImGui::SetNextWindowSize(size, ImGuiCond_Always);
+        ImGui::Begin("minimize_and_exit_window_id", &isOpen, flags);
         //
         ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(6, 4)); // padding interno dei bottoni (il blu)
-        ImGui::SetCursorPosX(pos.x - ImGui::CalcTextSize("- X").x - 30); // calcolo per metterli a destra
+        // Posiziona i bottoni a destra
+        float windowWidth = ImGui::GetWindowWidth();
+        ImGui::SetCursorPosX(windowWidth - ImGui::CalcTextSize("- X").x - 30);
         // Bottone Minimize
         ImGui::PushStyleColor(ImGuiCol_ButtonHovered, arancione); // hover arancione
         ImGui::PushStyleColor(ImGuiCol_Text, bianco); // testo bianco
         if (ImGui::Button("-")) {
-            glfwHideWindow(window_ptr); // TODO trovare un modo per mettere window nella classe
-            // TODO ho provato al posto di dichiararla nel main metterla in settings ma non funzionava
+            glfwHideWindow(window_ptr); 
         }
         ImGui::PopStyleColor(2);
         ImGui::SameLine();
@@ -158,9 +165,9 @@ namespace Gui {
         if (ImGui::Button("X")) {
             exit(0);
         }
+        checkWindowSizeChange(size);
         ImGui::PopStyleColor(2);
         ImGui::PopStyleVar();
         ImGui::End();
-
     }
 }

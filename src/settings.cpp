@@ -10,6 +10,15 @@
 //src
 #include "settings.h"
 
+ImGuiWindowFlags flags_minimize_and_exit_window =
+    ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoScrollbar
+    | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoBringToFrontOnFocus
+    | ImGuiWindowFlags_NoFocusOnAppearing | ImGuiWindowFlags_NoNav;
+// ImGuiWindowFlags flags_minimize_and_exit_window = ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoSavedSettings 
+//     | ImGuiWindowFlags_NoTitleBar;    
+ImGuiWindowFlags flags_login_window = 0; // oppure i flag che vuoi
+ImGuiWindowFlags flags_show_my_window = 0; // oppure i flag che vuoi
+
 // Frame_window
 GLFWwindow* frame_window = nullptr;
 int frame_window_width_setting = 1280;

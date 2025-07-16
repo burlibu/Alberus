@@ -34,3 +34,7 @@ extern int current;
 extern bool esperimenti_window;
 extern float my_float;
 extern int my_int;
+
+extern ImGuiWindowFlags flags_minimize_and_exit_window;
+extern ImGuiWindowFlags flags_login_window;
+extern ImGuiWindowFlags flags_show_my_window;

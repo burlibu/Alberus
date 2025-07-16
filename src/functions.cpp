@@ -176,16 +176,6 @@ bool checkWindowSizeChange(const ImVec2& currentSize, float checkIntervalSeconds
     return false; // Nessun cambiamento o timer non scaduto
 }
 
-Error RenderFrame(GLFWwindow* window, const ImVec4& clear_color) {
-    ImGui::Render();
-    int display_w, display_h;
-    glfwGetFramebufferSize(window, &display_w, &display_h);
-    glViewport(0, 0, display_w, display_h);
-    glClearColor(clear_color.x, clear_color.y, clear_color.z, clear_color.w);
-    glClear(GL_COLOR_BUFFER_BIT);
-    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-    glfwSwapBuffers(window);
-}
 
     
 

@@ -51,7 +51,7 @@ int main() {
     // Istanziazione classi finestre
     Gui::LoginWindow loginWin(ImVec2(100, 100), ImVec2(500, 400), frame_window_manager.getWindow());
     Gui::ShowMyWindow mywin(ImVec2(100, 100), ImVec2(500, 400), frame_window_manager.getWindow()); // classe loginWindow creata
-    Gui::MinimizeAndExitWindow minimize_and_exit_window(ImVec2(),ImVec2(minimize_and_exit_window_w,35.0f), frame_window_manager.getWindow());
+    Gui::MinimizeAndExitWindow minimize_and_exit_window(ImVec2(0,0),ImVec2(minimize_and_exit_window_w,35.0f), frame_window_manager.getWindow(),flags_minimize_and_exit_window);
      
 
     //* /////////////////////////////////////////////////////////// Loop principale ///////////////////////////////////////////////////////
