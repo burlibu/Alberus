@@ -219,3 +219,6 @@ enum class NotificationType {
     SUCCESS  ///< Notifica di successo
 };
 struct Notification;
+
+// TODO aggiungere più parametri alla funzione aumentando il controllo esterno
+Error RenderFrame(GLFWwindow* window, const ImVec4& clear_color);

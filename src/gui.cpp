@@ -37,9 +37,34 @@ namespace Gui {
     }
 
 
+    // TODO guardare dove mettere i possibili return fail
+    Error FrameWindowManager::RenderFrame(const ImVec4& clear_color) {
+    ImGui::Render();
+    int display_w, display_h;
+    glfwGetFramebufferSize(frame_window, &display_w, &display_h);
+    glViewport(0, 0, display_w, display_h);
+    glClearColor(clear_color.x, clear_color.y, clear_color.z, clear_color.w);
+    glClear(GL_COLOR_BUFFER_BIT);
+    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+    glfwSwapBuffers(frame_window);
+    return Error::OK;
+    }
+
+    void FrameWindowManager::CleanUp() {
+    ImGui_ImplOpenGL3_Shutdown();
+    ImGui_ImplGlfw_Shutdown();
+    ImGui::DestroyContext();
+    if (frame_window) {
+        glfwDestroyWindow(frame_window);
+        frame_window = nullptr;
+        }
+    glfwTerminate();
+    }
+
+
     //^ LoginWindow ////////////////////////////////////////////////////////////////////////////////////////////////////
     LoginWindow::LoginWindow(ImVec2 position, ImVec2 size, GLFWwindow* win) // inizializzazione costruttore Window
-        : Window("Login", position, size) {} // gli sta passando questi parametri
+        : Window("Login", position, size, win) {} // gli sta passando questi parametri
 
     /**
      *  Parameters:
@@ -71,7 +96,7 @@ namespace Gui {
 
     //& ShowMyWindow //////////////////////////////////////////////////////////////////////////////////////////////////////
     ShowMyWindow::ShowMyWindow(ImVec2 position, ImVec2 size, GLFWwindow* win) 
-        : Window("My window", position, size) {}
+        : Window("My window", position, size, win) {}
     /**
      *  Parameters:
      * 
@@ -107,13 +132,13 @@ namespace Gui {
 
     //! /////////////////////////////////////Minimize and exit window ////////////////////////////////////////////////////
     MinimizeAndExitWindow::MinimizeAndExitWindow(ImVec2 position, ImVec2 size, GLFWwindow* win) 
-        : Window("MinimizeAndExitWindow", position, size) {};
+        : Window("MinimizeAndExitWindow", position, size, win) {};
 
     void MinimizeAndExitWindow::Render() {
         // Inizializzazione
         ImGui::SetNextWindowPos(pos, ImGuiCond_FirstUseEver);
         ImGui::SetNextWindowSize(size, ImGuiCond_FirstUseEver);
-        ImGui::Begin("##minimize_and_exit_window_id", &isOpen, bar_flags);
+        ImGui::Begin("minimize_and_exit_window_id", &isOpen, bar_flags);
         //
         ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(6, 4)); // padding interno dei bottoni (il blu)
         ImGui::SetCursorPosX(pos.x - ImGui::CalcTextSize("- X").x - 30); // calcolo per metterli a destra

@@ -51,8 +51,8 @@ int main() {
     // Istanziazione classi finestre
     Gui::LoginWindow loginWin(ImVec2(100, 100), ImVec2(500, 400), frame_window_manager.getWindow());
     Gui::ShowMyWindow mywin(ImVec2(100, 100), ImVec2(500, 400), frame_window_manager.getWindow()); // classe loginWindow creata
-    Gui::MinimizeAndExitWindow minimize_and_exit_window(ImVec2(),ImVec2(minimize_and_exit_window_w,minimize_and_exit_window_h), frame_window_manager.getWindow());
-     // classe loginWindow creata
+    Gui::MinimizeAndExitWindow minimize_and_exit_window(ImVec2(),ImVec2(minimize_and_exit_window_w,35.0f), frame_window_manager.getWindow());
+     
 
     //* /////////////////////////////////////////////////////////// Loop principale ///////////////////////////////////////////////////////
     while (!glfwWindowShouldClose(frame_window_manager.getWindow())) {
@@ -63,16 +63,12 @@ int main() {
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
     //^ ///////////////////////////////////////////////////////// Render Login Form //////////////////////////////////////////////////////
-        ImVec2 renderLoginFormWindowPos = {100, 100}; // TODO da togliere quando si ha un sistema
-        ImVec2 renderLoginFormSize = {500,400};  // TODO da togliere quando si ha un sistema
         if (showRenderLoginForm) {
         loginWin.Render();
         }
     //^ //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        // La tua UI qui
+        
     //£ ///////////////////////////////////////////////////////My Window /////////////////////////////////////////////////////////////////
-        ImVec2 renderLoginFormWindowPosMyWindow = {600, 100}; // TODO da togliere quando si ha un sistema
-        ImVec2 renderLoginFormSizeMyWindow = {500,400};  // TODO da togliere quando si ha un sistema
         if (show_my_window) {
             mywin.Render();
         }
@@ -138,24 +134,11 @@ int main() {
         // Aggiungi questi nel tuo loop principale
 
         // Rendering
-        ImGui::Render();
-        int display_w, display_h;
-        glfwGetFramebufferSize(frame_window_manager.getWindow(), &display_w, &display_h);
-        glViewport(0, 0, display_w, display_h);
-        glClearColor(blu.x,blu.y,blu.z, blu.w);
-        glClear(GL_COLOR_BUFFER_BIT);
-        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-
-        glfwSwapBuffers(frame_window_manager.getWindow());
+        frame_window_manager.RenderFrame(blu);
     } // fine while principale
 
     // Cleanup
-    ImGui_ImplOpenGL3_Shutdown();
-    ImGui_ImplGlfw_Shutdown();
-    ImGui::DestroyContext();
-
-    glfwDestroyWindow(frame_window_manager.getWindow());
-    glfwTerminate();
+    frame_window_manager.CleanUp();
 
     return 0;
 }

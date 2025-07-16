@@ -36,6 +36,8 @@ public:
     Error Create();
 
     GLFWwindow* getWindow() const;
+    Error RenderFrame(const ImVec4& clear_color);
+    void CleanUp();
 
 private:
     GLFWwindow* frame_window = nullptr;
@@ -52,7 +54,8 @@ protected:
     
 
 public:
-    Window(const std::string& t, ImVec2 p, ImVec2 s) : title(t), pos(p), size(s), isOpen(true) {}
+    Window(const std::string& t, ImVec2 p, ImVec2 s, GLFWwindow* win)
+        : title(t), pos(p), size(s), isOpen(true), window_ptr(win) {}
         
     // distruttore virtuale che garantisce corretta distruzione nella gerarchia
     virtual ~Window() = default; 
@@ -105,7 +108,7 @@ public:
 class SettingsWindow : public Window {
     // TODO da implementare
 };
-
+//! ///////////////////////////////////////////Minimize and exit window ///////////////////////////////////////////////
 class MinimizeAndExitWindow : public Window {
 public:
     MinimizeAndExitWindow(ImVec2 p, ImVec2 s, GLFWwindow* win); // costruttore
