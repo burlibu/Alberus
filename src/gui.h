@@ -16,12 +16,40 @@
 
 namespace Gui {
 
+class FrameWindowManager {
+public:
+    int frame_window_width;
+    int frame_window_heigth;
+    std::string title;
+    GLFWmonitor *monitor;
+    GLFWwindow *share;
+
+    
+    FrameWindowManager(int width, int heigth, const std::string& t, GLFWmonitor *mon, GLFWwindow *sha); // costruttore
+    ~FrameWindowManager(); // distruttore
+    /**
+     * Funzione che genera la finestra principale del programma
+     * `frame_window` : variabile in cui verrà messo il risultato della funzione
+     * glfwCreateWindow()
+     * se !main_window ritorna false
+     */
+    Error Create();
+
+    GLFWwindow* getWindow() const;
+
+private:
+    GLFWwindow* frame_window = nullptr;
+    
+
+};
+
 class Window { // inizio class Window
 protected:
     std::string title;
     ImVec2 pos;
     ImVec2 size;
     bool isOpen;
+    
 
 public:
     Window(const std::string& t, ImVec2 p, ImVec2 s) : title(t), pos(p), size(s), isOpen(true) {}
@@ -43,6 +71,8 @@ public:
     bool* GetOpenPtr() {
         return &isOpen;
     }
+protected:
+    GLFWwindow* window_ptr;
 }; // fine class window
 //^ LoginWindow ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -55,7 +85,7 @@ private:
     
 
 public:
-    LoginWindow(ImVec2 p, ImVec2 s); // costruttore della classe
+    LoginWindow(ImVec2 p, ImVec2 s, GLFWwindow* win); // costruttore della classe
     void Render() override;
 }; // fine classe loginWindow
 //^ ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -65,7 +95,7 @@ public:
 
 class ShowMyWindow : public Window {
 public:
-    ShowMyWindow(ImVec2 p, ImVec2 s); //il costruttore deve avere lo stesso nome della classe
+    ShowMyWindow(ImVec2 p, ImVec2 s, GLFWwindow* win); //il costruttore deve avere lo stesso nome della classe
     unsigned int count = 0; // counter del bottone clickMe
     void Render() override;
 };
@@ -76,4 +106,13 @@ class SettingsWindow : public Window {
     // TODO da implementare
 };
 
+class MinimizeAndExitWindow : public Window {
+public:
+    MinimizeAndExitWindow(ImVec2 p, ImVec2 s, GLFWwindow* win); // costruttore
+    void Render() override;
+    float bar_height = 30.0f;
+    ImGuiWindowFlags bar_flags = ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoScrollbar 
+    | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoFocusOnAppearing 
+    | ImGuiWindowFlags_NoNav;
+}; // fine classe minimize and exit window
 } // fine namespace Gui

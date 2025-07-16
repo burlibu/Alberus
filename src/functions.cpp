@@ -16,6 +16,8 @@
 #include "functions.h"
 #include "custom_colors.h"
 
+
+
 struct Notification {
     std::string title;
     std::string text;
@@ -173,6 +175,7 @@ bool checkWindowSizeChange(const ImVec2& currentSize, float checkIntervalSeconds
     }
     return false; // Nessun cambiamento o timer non scaduto
 }
+
 
     
 

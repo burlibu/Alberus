@@ -23,14 +23,12 @@ int main() {
     }
 
     // Crea la finestra
-    GLFWwindow* window = glfwCreateWindow(1280, 720, "Alberus Project", nullptr, nullptr);
-    if (!window) {
-        std::cerr << "Errore nella creazione della finestra" << std::endl;
-        glfwTerminate();
-        return -1;
-    }
+    Gui::FrameWindowManager frame_window_manager(frame_window_width_setting,frame_window_heigth_setting,frame_window_title_setting,frame_window_monitor_setting,
+                                                frame_window_share_setting);
+    frame_window_manager.Create();
+    
 
-    glfwMakeContextCurrent(window);
+    glfwMakeContextCurrent(frame_window_manager.getWindow());
     glfwSwapInterval(1); // VSync
 
     // Inizializza Dear ImGui
@@ -43,15 +41,21 @@ int main() {
     ImGui::StyleColorsDark();
 
     // Setup Platform/Renderer backends
-    ImGui_ImplGlfw_InitForOpenGL(window, true);
+    ImGui_ImplGlfw_InitForOpenGL(frame_window_manager.getWindow(), true);
     ImGui_ImplOpenGL3_Init("#version 130");
 
-    Gui::LoginWindow loginWin(ImVec2(100, 100), ImVec2(500, 400));
-    Gui::ShowMyWindow mywin(ImVec2(100, 100), ImVec2(500, 400)); // classe loginWindow creata
+    //calcolo width and heigth finestra
+    int minimize_and_exit_window_w, minimize_and_exit_window_h;
+    glfwGetFramebufferSize(frame_window_manager.getWindow(), &minimize_and_exit_window_w, &minimize_and_exit_window_h);
+
+    // Istanziazione classi finestre
+    Gui::LoginWindow loginWin(ImVec2(100, 100), ImVec2(500, 400), frame_window_manager.getWindow());
+    Gui::ShowMyWindow mywin(ImVec2(100, 100), ImVec2(500, 400), frame_window_manager.getWindow()); // classe loginWindow creata
+    Gui::MinimizeAndExitWindow minimize_and_exit_window(ImVec2(),ImVec2(minimize_and_exit_window_w,minimize_and_exit_window_h), frame_window_manager.getWindow());
      // classe loginWindow creata
 
     //* /////////////////////////////////////////////////////////// Loop principale ///////////////////////////////////////////////////////
-    while (!glfwWindowShouldClose(window)) {
+    while (!glfwWindowShouldClose(frame_window_manager.getWindow())) {
         glfwPollEvents();
 
         // Start the Dear ImGui frame
@@ -76,37 +80,8 @@ int main() {
         //! ///////////////////////////////////////////////////////////
         //! MINIMIZE AND EXIT WINDOW //////////////////////////////////
         //! ///////////////////////////////////////////////////////////
-
-        // Ottieni dimensioni finestra principale
-        int minimize_and_exit_window_w, minimize_and_exit_window_h;
-        glfwGetFramebufferSize(window, &minimize_and_exit_window_w, &minimize_and_exit_window_h);
-        float bar_height = 30.0f;
-        ImGui::SetNextWindowPos(ImVec2(0, 0));
-        ImGui::SetNextWindowSize(ImVec2((float)minimize_and_exit_window_w, bar_height));
-        ImGuiWindowFlags bar_flags = ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoFocusOnAppearing | ImGuiWindowFlags_NoNav;
-        if (minimize_and_exit_window) {
-            ImGui::Begin("##minimize_and_exit_window_id", &minimize_and_exit_window, bar_flags);
-            // Bottoni a destra
-            ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(6, 4)); // padding interno dei bottoni (il blu)
-            ImGui::SetCursorPosX(minimize_and_exit_window_w - ImGui::CalcTextSize("- X").x - 30); // calcolo per metterli a destra
-            // Bottone Minimize
-            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, arancione); // hover arancione
-            ImGui::PushStyleColor(ImGuiCol_Text, bianco); // testo bianco
-            if (ImGui::Button("-")) {
-                glfwHideWindow(window);
-            }
-            ImGui::PopStyleColor(2);
-            ImGui::SameLine();
-
-            // Bottone Exit
-            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, rosso); // hover rosso
-            ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1,1,1,1)); // testo bianco
-            if (ImGui::Button("X")) {
-                exit(0);
-            }
-            ImGui::PopStyleColor(2);
-            ImGui::PopStyleVar();
-            ImGui::End();
+        if (minimize_and_exit_window_bool) {
+            minimize_and_exit_window.Render();
         }
         //! ///////////////////////////////////////////////////////////
 
@@ -165,13 +140,13 @@ int main() {
         // Rendering
         ImGui::Render();
         int display_w, display_h;
-        glfwGetFramebufferSize(window, &display_w, &display_h);
+        glfwGetFramebufferSize(frame_window_manager.getWindow(), &display_w, &display_h);
         glViewport(0, 0, display_w, display_h);
         glClearColor(blu.x,blu.y,blu.z, blu.w);
         glClear(GL_COLOR_BUFFER_BIT);
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
-        glfwSwapBuffers(window);
+        glfwSwapBuffers(frame_window_manager.getWindow());
     } // fine while principale
 
     // Cleanup
@@ -179,7 +154,7 @@ int main() {
     ImGui_ImplGlfw_Shutdown();
     ImGui::DestroyContext();
 
-    glfwDestroyWindow(window);
+    glfwDestroyWindow(frame_window_manager.getWindow());
     glfwTerminate();
 
     return 0;

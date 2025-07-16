@@ -15,8 +15,30 @@
 #include "gui.h"
 
 namespace Gui {
+    // Frame Window ////////////////////////////////////////////////////////////////////////////////////////////////////
+    FrameWindowManager::FrameWindowManager(int width, int height, const std::string& t, GLFWmonitor *mon, GLFWwindow *sha) 
+        : frame_window_width(width), frame_window_heigth(height), title(t.c_str()), monitor(mon), share(sha), frame_window(nullptr){
+        // attenzione: qui perdi la proprietà di std::string ! -> ->  ^   
+    }
+    FrameWindowManager::~FrameWindowManager() {
+        if (frame_window) {
+            glfwDestroyWindow(frame_window);
+        }
+    }
+
+    Error FrameWindowManager::Create() {
+        frame_window = glfwCreateWindow(frame_window_width, frame_window_heigth, title.c_str(), monitor, share);
+        if (!frame_window) return Error::FAIL;
+        return Error::OK;
+    }
+    
+    GLFWwindow* FrameWindowManager::getWindow() const {
+        return frame_window;
+    }
+
+
     //^ LoginWindow ////////////////////////////////////////////////////////////////////////////////////////////////////
-    LoginWindow::LoginWindow(ImVec2 position, ImVec2 size) // inizializzazione costruttore Window
+    LoginWindow::LoginWindow(ImVec2 position, ImVec2 size, GLFWwindow* win) // inizializzazione costruttore Window
         : Window("Login", position, size) {} // gli sta passando questi parametri
 
     /**
@@ -48,7 +70,7 @@ namespace Gui {
 
 
     //& ShowMyWindow //////////////////////////////////////////////////////////////////////////////////////////////////////
-    ShowMyWindow::ShowMyWindow(ImVec2 position, ImVec2 size) 
+    ShowMyWindow::ShowMyWindow(ImVec2 position, ImVec2 size, GLFWwindow* win) 
         : Window("My window", position, size) {}
     /**
      *  Parameters:
@@ -82,4 +104,38 @@ namespace Gui {
         }
     }
     //& //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    //! /////////////////////////////////////Minimize and exit window ////////////////////////////////////////////////////
+    MinimizeAndExitWindow::MinimizeAndExitWindow(ImVec2 position, ImVec2 size, GLFWwindow* win) 
+        : Window("MinimizeAndExitWindow", position, size) {};
+
+    void MinimizeAndExitWindow::Render() {
+        // Inizializzazione
+        ImGui::SetNextWindowPos(pos, ImGuiCond_FirstUseEver);
+        ImGui::SetNextWindowSize(size, ImGuiCond_FirstUseEver);
+        ImGui::Begin("##minimize_and_exit_window_id", &isOpen, bar_flags);
+        //
+        ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(6, 4)); // padding interno dei bottoni (il blu)
+        ImGui::SetCursorPosX(pos.x - ImGui::CalcTextSize("- X").x - 30); // calcolo per metterli a destra
+        // Bottone Minimize
+        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, arancione); // hover arancione
+        ImGui::PushStyleColor(ImGuiCol_Text, bianco); // testo bianco
+        if (ImGui::Button("-")) {
+            glfwHideWindow(window_ptr); // TODO trovare un modo per mettere window nella classe
+            // TODO ho provato al posto di dichiararla nel main metterla in settings ma non funzionava
+        }
+        ImGui::PopStyleColor(2);
+        ImGui::SameLine();
+
+        // Bottone Exit
+        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, rosso); // hover rosso
+        ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1,1,1,1)); // testo bianco
+        if (ImGui::Button("X")) {
+            exit(0);
+        }
+        ImGui::PopStyleColor(2);
+        ImGui::PopStyleVar();
+        ImGui::End();
+
+    }
 }

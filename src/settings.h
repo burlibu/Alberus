@@ -11,7 +11,15 @@
 //src
 #include "env.h"
 
-extern bool minimize_and_exit_window;
+// frame che ospiterà le finestre
+
+extern int frame_window_width_setting;
+extern int frame_window_heigth_setting;
+extern std::string frame_window_title_setting;
+extern GLFWmonitor *frame_window_monitor_setting;
+extern GLFWwindow *frame_window_share_setting;
+
+extern bool minimize_and_exit_window_bool;
 extern bool show_demo_window;
 extern bool show_my_window;
 extern bool window1;

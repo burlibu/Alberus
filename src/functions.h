@@ -16,6 +16,11 @@
 
 #include "custom_colors.h"
 
+enum class Error {
+    OK,
+    FAIL
+};
+
 namespace Math {
     /**
  * @brief Funzione che calcola il fattoriale 
