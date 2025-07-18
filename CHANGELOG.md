@@ -15,9 +15,7 @@
 - Dato una struttura più robusta al progetto
 - Avviata documentazione funzioni con Doxygen e creato Doxygen docs in docs/
 
-## Version 0.03
-
-### 16/7/2025
+## Version 0.03 \ ### 16/7/2025
 
 - Ristrutturato tutto il codice attraverso classi
 - TODO: Creare un metodo per calcolare quali pixel sono occupati da delle finestre in runtime in modo da
