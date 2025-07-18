@@ -14,10 +14,14 @@ ImGuiWindowFlags flags_minimize_and_exit_window =
     ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoScrollbar
     | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoBringToFrontOnFocus
     | ImGuiWindowFlags_NoFocusOnAppearing | ImGuiWindowFlags_NoNav;
-// ImGuiWindowFlags flags_minimize_and_exit_window = ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoSavedSettings 
-//     | ImGuiWindowFlags_NoTitleBar;    
-ImGuiWindowFlags flags_login_window = 0; // oppure i flag che vuoi
-ImGuiWindowFlags flags_show_my_window = 0; // oppure i flag che vuoi
+  
+ImGuiWindowFlags flags_login_window = 0; 
+ImGuiWindowFlags flags_my_window = 0; 
+ImGuiWindowFlags flags_demo_window = 0;
+ImGuiWindowFlags flags_esperimenti_window = 0; 
+ImGuiWindowFlags flags_window1 = 0; 
+
+
 
 // Frame_window
 GLFWwindow* frame_window = nullptr;
@@ -27,11 +31,14 @@ std::string frame_window_title_setting = "Alberus Project";
 GLFWmonitor *frame_window_monitor_setting;
 GLFWwindow *frame_window_share_setting;
 
-bool minimize_and_exit_window_bool = true;
-bool show_demo_window              = false;
-bool show_my_window                = true;
-bool window1                       = false;
-bool showRenderLoginForm           = true;
+bool bool_minimize_and_exit_window      = true;
+bool bool_demo_window                   = true;
+bool bool_my_window                     = true;
+bool bool_window1                       = true;
+bool bool_login_window                  = true;
+bool bool_esperimenti_window            = true;
+
+
 
 // Impostazioni Window 1 
 float value1 =  0.1f;

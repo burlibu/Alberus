@@ -37,13 +37,16 @@ namespace Gui {
     }
 
 
-    // TODO guardare dove mettere i possibili return fail
-    Error FrameWindowManager::RenderFrame(const ImVec4& clear_color) {
+    /**
+     * Renderizza la finestra
+     * `fwbc` : [frame_window_background_color]: color of the background
+     */
+    Error FrameWindowManager::RenderFrame(const ImVec4& fwbc) {
     ImGui::Render();
     int display_w, display_h;
     glfwGetFramebufferSize(frame_window, &display_w, &display_h);
     glViewport(0, 0, display_w, display_h);
-    glClearColor(clear_color.x, clear_color.y, clear_color.z, clear_color.w);
+    glClearColor(fwbc.x, fwbc.y, fwbc.z, fwbc.w);
     glClear(GL_COLOR_BUFFER_BIT);
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
     glfwSwapBuffers(frame_window);
@@ -63,8 +66,8 @@ namespace Gui {
 
 
     //^ LoginWindow ////////////////////////////////////////////////////////////////////////////////////////////////////
-    LoginWindow::LoginWindow(ImVec2 position, ImVec2 size, GLFWwindow* win) // inizializzazione costruttore Window
-        : Window("Login", position, size, win) {} // gli sta passando questi parametri
+    LoginWindow::LoginWindow(ImVec2 position, ImVec2 size, GLFWwindow* win, ImGuiWindowFlags f) // inizializzazione costruttore Window
+        : Window("Login", position, size, win, f) {} // gli sta passando questi parametri
 
     /**
      *  Parameters:
@@ -87,7 +90,7 @@ namespace Gui {
                 }
             }
             if (login_success) ImGui::TextColored(ImVec4(0,1,0,1), "Login Successful");
-            if (!login_success) ImGui::TextColored(ImVec4(1,0,0,1), "Login Failed");
+            else ImGui::TextColored(ImVec4(1,0,0,1), "Login Failed");
         }
         ImGui::End();
     } // fine funzione Render
@@ -95,8 +98,8 @@ namespace Gui {
 
 
     //& ShowMyWindow //////////////////////////////////////////////////////////////////////////////////////////////////////
-    ShowMyWindow::ShowMyWindow(ImVec2 position, ImVec2 size, GLFWwindow* win) 
-        : Window("My window", position, size, win) {}
+    ShowMyWindow::ShowMyWindow(ImVec2 position, ImVec2 size, GLFWwindow* win, ImGuiWindowFlags f) 
+        : Window("My window", position, size, win, f) {}
     /**
      *  Parameters:
      * 
@@ -107,7 +110,7 @@ namespace Gui {
     void ShowMyWindow::Render() {
         ImGui::SetNextWindowPos(pos, ImGuiCond_FirstUseEver);
         ImGui::SetNextWindowSize(size, ImGuiCond_FirstUseEver);
-        ImGui::Begin("Alberus [Cariddi#1]", &isOpen);
+        ImGui::Begin("MyWindow", &isOpen);
         ImGui::Text("Benvenuto nel mio progetto ImGui!");
         ImGui::Separator();
         
@@ -144,7 +147,7 @@ namespace Gui {
 
         ImGui::SetNextWindowPos(pos, ImGuiCond_Always);
         ImGui::SetNextWindowSize(size, ImGuiCond_Always);
-        ImGui::Begin("minimize_and_exit_window_id", &isOpen, flags);
+        ImGui::Begin("minimize_and_exit_window_id", &isOpen, flags_minimize_and_exit_window);
         //
         ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(6, 4)); // padding interno dei bottoni (il blu)
         // Posiziona i bottoni a destra
@@ -169,5 +172,67 @@ namespace Gui {
         ImGui::PopStyleColor(2);
         ImGui::PopStyleVar();
         ImGui::End();
+    } // fine MinimizeAndExitWindow::Render()
+    ////////////////////////////////////////////////////Show Demo Window///////////////////////////////////////////////////////
+    showDemoWindow::showDemoWindow(ImVec2 p, ImVec2 s, GLFWwindow* win, ImGuiWindowFlags f) 
+    : Window("Demo Window", p, s, win, f){ // costruttore con lista di inizializzazione
+
+    };
+    void showDemoWindow::Render() {
+        ImGui::ShowDemoWindow(&bool_demo_window);
+    };
+
+    //////////////////////////////////////////////////Esperimenti Window ////////////////////////////////////////////////////
+    EsperimentiWindow::EsperimentiWindow(ImVec2 p, ImVec2 s, GLFWwindow* win, ImGuiWindowFlags f)
+    : Window("Esperimenti", p, s, win, f) {
+
     }
-}
+    void EsperimentiWindow::Render() {
+        ImGui::Begin("Esperimenti", &bool_esperimenti_window, flags_esperimenti_window);
+
+        // Input text
+        static char text[128] = "";
+        ImGui::InputText("Nome", text, IM_ARRAYSIZE(text));
+
+        // Checkbox
+        static bool checkbox = false;
+        ImGui::Checkbox("Attiva checkbox", &checkbox);
+
+        // Radio buttons
+        static int radio = 0;
+        ImGui::RadioButton("Opzione 1", &radio, 0);
+        ImGui::RadioButton("Opzione 2", &radio, 1);
+
+        // Color picker
+        static float color[4] = {1.0f, 0.0f, 0.0f, 1.0f};
+        ImGui::ColorEdit4("Colore", color);
+
+        ImGui::End();
+    }
+
+    //////////////////////////////////////Window 1 /////////////////////////////////////////////////////////////////
+    Window1::Window1(ImVec2 p, ImVec2 s, GLFWwindow* win, ImGuiWindowFlags f)
+    : Window("Window1", p, s, win, f) {
+
+    }
+
+    void Window1::Render() {
+    ImGui::Begin("Window1", &bool_window1, flags_window1);
+
+    if (ImGui::Button("My button", ImVec2(100,100))) {
+        // tutto quello in questo if verrà eseguito quando il bottone sarà premuto
+        ImGui::Text("You pressed the button");
+    }
+    bool checkBoxValue = true;
+    ImGui::Checkbox("CheckBox", &checkBoxValue);
+
+    ImGui::SliderFloat("My Float Slider", &value1, 0.0f, 100.0f);
+
+    ImGui::Combo("##id1", &current, items.data(), items.size());
+    ImGui::SetCursorPosX(ImGui::GetWindowWidth()/2 - ImGui::CalcTextSize("This is some text").x/2);
+    ImGui::Text("This is some text");
+    ImGui::End();
+    };
+
+
+} // fine namespace gui

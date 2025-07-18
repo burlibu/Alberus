@@ -19,12 +19,19 @@ extern std::string frame_window_title_setting;
 extern GLFWmonitor *frame_window_monitor_setting;
 extern GLFWwindow *frame_window_share_setting;
 
-extern bool minimize_and_exit_window_bool;
-extern bool show_demo_window;
-extern bool show_my_window;
-extern bool window1;
-extern bool showRenderLoginForm;
+extern bool bool_minimize_and_exit_window;
+extern bool bool_demo_window;
+extern bool bool_my_window;
+extern bool bool_window1;
+extern bool bool_login_window;
+extern bool bool_esperimenti_window;
 
+extern ImGuiWindowFlags flags_minimize_and_exit_window;
+extern ImGuiWindowFlags flags_login_window;
+extern ImGuiWindowFlags flags_my_window;
+extern ImGuiWindowFlags flags_demo_window;
+extern ImGuiWindowFlags flags_esperimenti_window; 
+extern ImGuiWindowFlags flags_window1; 
 // Impostazioni Window 1 
 extern float value1;
 extern int value2;
@@ -35,6 +42,3 @@ extern bool esperimenti_window;
 extern float my_float;
 extern int my_int;
 
-extern ImGuiWindowFlags flags_minimize_and_exit_window;
-extern ImGuiWindowFlags flags_login_window;
-extern ImGuiWindowFlags flags_show_my_window;

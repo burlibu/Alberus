@@ -49,9 +49,12 @@ int main() {
     glfwGetFramebufferSize(frame_window_manager.getWindow(), &minimize_and_exit_window_w, &minimize_and_exit_window_h);
 
     // Istanziazione classi finestre
-    Gui::LoginWindow loginWin(ImVec2(100, 100), ImVec2(500, 400), frame_window_manager.getWindow());
-    Gui::ShowMyWindow mywin(ImVec2(100, 100), ImVec2(500, 400), frame_window_manager.getWindow()); // classe loginWindow creata
     Gui::MinimizeAndExitWindow minimize_and_exit_window(ImVec2(0,0),ImVec2(minimize_and_exit_window_w,35.0f), frame_window_manager.getWindow(),flags_minimize_and_exit_window);
+    Gui::LoginWindow loginWin(ImVec2(100, 100), ImVec2(500, 400), frame_window_manager.getWindow(), flags_login_window);
+    Gui::ShowMyWindow mywin(ImVec2(100, 100), ImVec2(500, 400), frame_window_manager.getWindow(), flags_my_window); // classe loginWindow creata
+    Gui::showDemoWindow demoWindow(ImVec2(400,400), ImVec2(200,200), frame_window_manager.getWindow(),flags_demo_window);
+    Gui::EsperimentiWindow esperimenti_window(ImVec2(300,300), ImVec2(200,200), frame_window_manager.getWindow(),flags_esperimenti_window);
+    Gui::Window1 window1(ImVec2(100, 100), ImVec2(500, 400), frame_window_manager.getWindow(), flags_window1);
      
 
     //* /////////////////////////////////////////////////////////// Loop principale ///////////////////////////////////////////////////////
@@ -62,79 +65,42 @@ int main() {
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
-    //^ ///////////////////////////////////////////////////////// Render Login Form //////////////////////////////////////////////////////
-        if (showRenderLoginForm) {
-        loginWin.Render();
+    //^ ///////////////////////////////////////////////////////// Login Window ///////////////////////////////////////////////////////////
+        if (bool_login_window) {
+            loginWin.Render();
         }
-    //^ //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
         
     //£ ///////////////////////////////////////////////////////My Window /////////////////////////////////////////////////////////////////
-        if (show_my_window) {
+        if (bool_my_window) {
             mywin.Render();
         }
-    //£ /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        //! ///////////////////////////////////////////////////////////
-        //! MINIMIZE AND EXIT WINDOW //////////////////////////////////
-        //! ///////////////////////////////////////////////////////////
-        if (minimize_and_exit_window_bool) {
+    
+        
+    //! ////////////////////////////////////////////////MINIMIZE AND EXIT WINDOW /////////////////////////////////////////////////////////
+        if (bool_minimize_and_exit_window) {
             minimize_and_exit_window.Render();
         }
-        //! ///////////////////////////////////////////////////////////
+     
 
-//*  /////////////////////////////////////////////////// Window1 ////////////////////////////////////
-        ImGui::SetNextWindowPos(ImVec2(500,100));
-        ImGui::SetNextWindowSize(ImVec2(600,400)); //£ MEMO 2
-        if (window1) {
-            ImGui::Begin("Window1", &window1);
-
-            if (ImGui::Button("My button", ImVec2(100,100))) {
-                // tutto quello in questo if verrà eseguito quando il bottone sarà premuto
-                ImGui::Text("You pressed the button");
-            }
-            bool checkBoxValue = true;
-            ImGui::Checkbox("CheckBox", &checkBoxValue);
-
-            ImGui::SliderFloat("My Float Slider", &value1, 0.0f, 100.0f);
-
-            ImGui::Combo("##id1", &current, items.data(), items.size());
-            ImGui::SetCursorPosX(ImGui::GetWindowWidth()/2 - ImGui::CalcTextSize("This is some text").x/2);
-            ImGui::Text("This is some text");
-            ImGui::End();
+    //*  ////////////////////////////////////////////////////////// Window1 ///////////////////////////////////////////////////////////////
+        if (bool_window1) {
+            window1.Render();
         }
-//* /////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    // TODO /////////////////////////////////////////////////////// Demo Window ////////////////////////////////////////////////////////////
+        if (bool_demo_window) {
+            demoWindow.Render();
+        }
+
+    //? ///////////////////////////////////////////////////////// Esperimenti window //////////////////////////////////////////////////////
+        if (bool_esperimenti_window) {
+            esperimenti_window.Render();
+        }
         
 
-        // Demo window (opzionale)
-        if (show_demo_window) {
-            ImGui::ShowDemoWindow(&show_demo_window);
-        }
-        if (esperimenti_window) {
-            ImGui::Begin("Esperimenti");
-
-            // Input text
-            static char text[128] = "";
-            ImGui::InputText("Nome", text, IM_ARRAYSIZE(text));
-
-            // Checkbox
-            static bool checkbox = false;
-            ImGui::Checkbox("Attiva checkbox", &checkbox);
-
-            // Radio buttons
-            static int radio = 0;
-            ImGui::RadioButton("Opzione 1", &radio, 0);
-            ImGui::RadioButton("Opzione 2", &radio, 1);
-
-            // Color picker
-            static float color[4] = {1.0f, 0.0f, 0.0f, 1.0f};
-            ImGui::ColorEdit4("Colore", color);
-
-            ImGui::End();
-
-        }
-        // Aggiungi questi nel tuo loop principale
-
-        // Rendering
-        frame_window_manager.RenderFrame(blu);
+    // Rendering frame principale
+    frame_window_manager.RenderFrame(blu);
     } // fine while principale
 
     // Cleanup

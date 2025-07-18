@@ -9,7 +9,7 @@ my_imgui_app
 .idea/
 *.swp
 *.swo
-
+.cursorrules
 # OS files
 .DS_Store
 Thumbs.db
@@ -19,3 +19,5 @@ alberus
 
 #memos
 memos.txt
+
+imgui.ini

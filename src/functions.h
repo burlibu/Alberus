@@ -21,6 +21,15 @@ enum class Error {
     FAIL
 };
 
+enum class NotificationType {
+    INFO,    ///< Notifica informativa
+    WARNING, ///< Notifica di avvertimento
+    ERROR,   ///< Notifica di errore
+    SUCCESS  ///< Notifica di successo
+};
+struct Notification;
+
+
 namespace Math {
     /**
  * @brief Funzione che calcola il fattoriale 
@@ -64,7 +73,6 @@ void style();
  *  @ingroup notifications
  */
 void showNotification(); //MEMO6
-
 /**
  * @brief Funzione che prende una stringa colore come bde0fe o bde0fe80 e ritorna un ImVec4 corrispettivo 
  * @param[in] n numero intero per calcolo fattoriale >= 0
@@ -76,7 +84,6 @@ ImVec4 hexToImVec4(const std::string& hex);
  * @brief Funzione che disegna un rettangolo che si illumina
  */
 void DrawGlowingRectangle();
-
 /*! @brief Esegue un carico di lavoro intensivo simulato.
  *
  *  @details Questa funzione simula un'operazione computazionalmente pesante
@@ -200,24 +207,27 @@ void DrawGlowingRectangle();
  *  @endcode
  */
 void HardLoad();
-
+/**
+ * 
+ */
 int lavoro_lungo();
-
+/**
+ * 
+ */
 void esempio_future();
 /**
  * Prende un ImVec2 e lo trasforma in una stringa per esempio (200, 300) diventa "200, 300" 
+ * @param vector un imvec2
  */
 std::string ImVec2_to_string(const ImVec2& vector );
-// TODO documentare
+/**
+ * Controlla ogni 5 secondi se la size della finestra è cambiata e lo scrive in terminal
+ * @param currentsize size attuale quando viene chiamata la funzione
+ * @param checkIntervalSeconds time between size checks
+ * @return bool
+ */
 bool checkWindowSizeChange(const ImVec2& currentSize, float checkIntervalSeconds = 5.0f);
-
-
-enum class NotificationType {
-    INFO,    ///< Notifica informativa
-    WARNING, ///< Notifica di avvertimento
-    ERROR,   ///< Notifica di errore
-    SUCCESS  ///< Notifica di successo
-};
-struct Notification;
-
-
+/**
+ * Prende il puntatore ad una finestra e ne restituisce le coordinate in mezzo 
+ */
+ImVec2 CenterPosWindow(ImVec2 imvec2, GLFWwindow* window_ptr);

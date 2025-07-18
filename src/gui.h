@@ -15,14 +15,16 @@
 #include "custom_colors.h"
 
 namespace Gui {
-
+/**
+ * Classe primaria
+ */
 class FrameWindowManager {
 public:
-    int frame_window_width;
-    int frame_window_heigth;
-    std::string title;
-    GLFWmonitor *monitor;
-    GLFWwindow *share;
+    int frame_window_width; // la larghezza del frame
+    int frame_window_heigth; // l' altezza del frame
+    std::string title; // titolo del frame
+    GLFWmonitor *monitor;  // The monitor to use for full screen mode, or NULL for windowed mode.
+    GLFWwindow *share;  // The window whose context to share resources with, or NULL to not share resources
 
     
     FrameWindowManager(int width, int heigth, const std::string& t, GLFWmonitor *mon, GLFWwindow *sha); // costruttore
@@ -34,7 +36,9 @@ public:
      * se !main_window ritorna false
      */
     Error Create();
-
+    /**
+     * Funzione che ritorna il puntatore GLFWwindow* alla finestra principale
+     */
     GLFWwindow* getWindow() const;
     Error RenderFrame(const ImVec4& clear_color);
     void CleanUp();
@@ -42,7 +46,9 @@ public:
 private:
     GLFWwindow* frame_window = nullptr;
 };
-
+/**
+ * CLasse primaria
+ */
 class Window { // inizio class Window
 protected:
     std::string title;
@@ -74,10 +80,14 @@ public:
     bool* GetOpenPtr() {
         return &isOpen;
     }
+    int Area() {
+        return size.x * size.y;
+    }
 protected:
     GLFWwindow* window_ptr;
 }; // fine class window
-//^ LoginWindow ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//^ ///////////////////////////////////////////////////////// Login Window ///////////////////////////////////////////////////////////
 
 class LoginWindow : public Window { // inizio classe LoginWindow
 private:
@@ -88,21 +98,21 @@ private:
     
 
 public:
-    LoginWindow(ImVec2 p, ImVec2 s, GLFWwindow* win); // costruttore della classe
+    LoginWindow(ImVec2 p, ImVec2 s, GLFWwindow* win, ImGuiWindowFlags f); // costruttore della classe
     void Render() override;
 }; // fine classe loginWindow
-//^ ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 
 //& ShowMyWindow /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 class ShowMyWindow : public Window {
 public:
-    ShowMyWindow(ImVec2 p, ImVec2 s, GLFWwindow* win); //il costruttore deve avere lo stesso nome della classe
+    ShowMyWindow(ImVec2 p, ImVec2 s, GLFWwindow* win, ImGuiWindowFlags f); //il costruttore deve avere lo stesso nome della classe
     unsigned int count = 0; // counter del bottone clickMe
     void Render() override;
-};
-//& //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+}; // fine class ShowMyWindow
+
 
 
 class SettingsWindow : public Window {
@@ -116,4 +126,23 @@ public:
     float bar_height = 30.0f;
     
 }; // fine classe minimize and exit window
+
+class showDemoWindow : public Window {
+public:
+    showDemoWindow(ImVec2 p, ImVec2 s, GLFWwindow* win, ImGuiWindowFlags f);//costruttore
+    void Render() override;
+};
+
+class EsperimentiWindow : public Window {
+public:
+    EsperimentiWindow(ImVec2 p, ImVec2 s, GLFWwindow* win, ImGuiWindowFlags f); // costruttore
+    void Render() override;
+};
+
+class Window1 : public Window {
+public:
+    Window1(ImVec2 p, ImVec2 s, GLFWwindow* win, ImGuiWindowFlags f); // costruttore
+    void Render() override;
+};
+
 } // fine namespace Gui
