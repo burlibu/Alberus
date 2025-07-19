@@ -64,6 +64,17 @@ namespace Gui {
     glfwTerminate();
     }
 
+    Window::WindowVertices Window::GetVertices () const{
+        Window::WindowVertices verts;
+        verts.p1 = pos;
+        verts.p2 = ImVec2(pos.x + size.x, pos.y);
+        verts.p3 = ImVec2(pos.x + size.x, pos.y + size.y);
+        verts.p4 = ImVec2(pos.x, pos.y + size.y);
+        return verts;
+    }
+
+
+
 
     //^ LoginWindow ////////////////////////////////////////////////////////////////////////////////////////////////////
     LoginWindow::LoginWindow(ImVec2 position, ImVec2 size, GLFWwindow* win, ImGuiWindowFlags f) // inizializzazione costruttore Window
@@ -94,6 +105,12 @@ namespace Gui {
         }
         ImGui::End();
     } // fine funzione Render
+
+    void LoginWindow::isLogged(){
+        if (login_success) {
+            logged = true;
+        } else logged = false;
+    }
     //^ ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 

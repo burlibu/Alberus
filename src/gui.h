@@ -68,6 +68,14 @@ public:
     // Funzione virtuale pura: ogni finestra la implementa
     virtual void Render() = 0; 
 
+    ImVec2 GetPos() {
+        return pos; 
+    }
+
+    ImVec2 GetSize() {
+        return size; 
+    }
+
     void SetPos(const ImVec2& p) {
         pos = p; 
     }
@@ -80,9 +88,21 @@ public:
     bool* GetOpenPtr() {
         return &isOpen;
     }
-    int Area() {
+    inline float Area() {
         return size.x * size.y;
     }
+
+    struct WindowVertices {
+        ImVec2 p1;
+        ImVec2 p2;
+        ImVec2 p3;
+        ImVec2 p4;
+
+    };
+
+    WindowVertices GetVertices() const;
+
+    
 protected:
     GLFWwindow* window_ptr;
 }; // fine class window
@@ -94,12 +114,14 @@ private:
     char username[64] = "";
     char password[64] = "";
     bool login_success = false;
-    bool login_failed = false;
     
-
-public:
+    
+    
+    public:
     LoginWindow(ImVec2 p, ImVec2 s, GLFWwindow* win, ImGuiWindowFlags f); // costruttore della classe
     void Render() override;
+    bool logged = false;
+    void isLogged();
 }; // fine classe loginWindow
 
 

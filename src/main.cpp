@@ -68,6 +68,18 @@ int main() {
     //^ ///////////////////////////////////////////////////////// Login Window ///////////////////////////////////////////////////////////
         if (bool_login_window) {
             loginWin.Render();
+            loginWin.isLogged();
+            if (!loginWin.logged){
+                bool_my_window = false;
+                bool_window1 = false;
+                bool_demo_window = false;
+                bool_esperimenti_window = false;
+            } else {
+                bool_my_window = true;
+                bool_window1 = true;
+                bool_demo_window = true;
+                bool_esperimenti_window = true;
+            }
         }
     
         
