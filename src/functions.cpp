@@ -66,8 +66,7 @@ void style() {
     style.Colors[ImGuiCol_Button] = ImVec4(193.0f/255,60.0f/255,60.0f/255,255.0f/255);
 };
 
-const std::string username = "admin";
-const std::string password = "password";
+
 
 
 
@@ -174,7 +173,7 @@ bool checkWindowSizeChange(const ImVec2& currentSize, float checkIntervalSeconds
     return false; // Nessun cambiamento o timer non scaduto
 }
 
-
+// TODO
 ImVec2 CenterPosWindow(ImVec2 imvec2, GLFWwindow* window_ptr) {
 
 }

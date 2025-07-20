@@ -42,3 +42,5 @@ extern bool esperimenti_window;
 extern float my_float;
 extern int my_int;
 
+const std::string username;
+const std::string password;

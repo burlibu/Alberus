@@ -68,7 +68,7 @@ int main() {
     //^ ///////////////////////////////////////////////////////// Login Window ///////////////////////////////////////////////////////////
         if (bool_login_window) {
             loginWin.Render();
-            loginWin.isLogged();
+            loginWin.isLogged(); // TODO da rendere più sicuro ed efficiente
             if (!loginWin.logged){
                 bool_my_window = false;
                 bool_window1 = false;
@@ -81,7 +81,7 @@ int main() {
                 bool_esperimenti_window = true;
             }
         }
-    
+        
         
     //£ ///////////////////////////////////////////////////////My Window /////////////////////////////////////////////////////////////////
         if (bool_my_window) {

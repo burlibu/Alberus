@@ -17,6 +17,7 @@
 namespace Gui {
 /**
  * Classe primaria
+ * Frame
  */
 class FrameWindowManager {
 public:
@@ -108,8 +109,10 @@ protected:
 }; // fine class window
 
 //^ ///////////////////////////////////////////////////////// Login Window ///////////////////////////////////////////////////////////
-
-class LoginWindow : public Window { // inizio classe LoginWindow
+/**
+ * Finestra di Login
+ */
+class LoginWindow : public Window {
 private:
     char username[64] = "";
     char password[64] = "";
@@ -149,18 +152,21 @@ public:
     
 }; // fine classe minimize and exit window
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 class showDemoWindow : public Window {
 public:
     showDemoWindow(ImVec2 p, ImVec2 s, GLFWwindow* win, ImGuiWindowFlags f);//costruttore
     void Render() override;
 };
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class EsperimentiWindow : public Window {
 public:
     EsperimentiWindow(ImVec2 p, ImVec2 s, GLFWwindow* win, ImGuiWindowFlags f); // costruttore
     void Render() override;
 };
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class Window1 : public Window {
 public:
     Window1(ImVec2 p, ImVec2 s, GLFWwindow* win, ImGuiWindowFlags f); // costruttore

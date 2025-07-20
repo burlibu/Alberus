@@ -49,3 +49,7 @@ int current = 0;
 bool esperimenti_window = false;
 float my_float = 0.0f;
 int my_int = 0;
+
+
+const std::string username = "admin";
+const std::string password = "password";
