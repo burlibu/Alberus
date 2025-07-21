@@ -25,7 +25,11 @@ extern ImGuiWindowFlags flags_my_window;
 extern ImGuiWindowFlags flags_demo_window;
 extern ImGuiWindowFlags flags_esperimenti_window; 
 extern ImGuiWindowFlags flags_window1; 
-extern ImGuiWindowFlags flags_menu_bar; 
+extern ImGuiWindowFlags flags_menu_bar;
+extern ImGuiWindowFlags flags_tab_window; 
+extern ImGuiWindowFlags flags_tree; 
+
+
 
 extern bool bool_minimize_and_exit_window;
 extern bool bool_demo_window;
@@ -34,6 +38,10 @@ extern bool bool_window1;
 extern bool bool_login_window;
 extern bool bool_esperimenti_window;
 extern bool bool_menu_bar;
+extern bool bool_tab_window;
+extern bool bool_Tree;
+
+
 
 
 // Impostazioni Window 1 

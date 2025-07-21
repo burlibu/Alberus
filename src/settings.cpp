@@ -10,6 +10,15 @@
 //src
 #include "settings.h"
 
+// Frame_window
+GLFWwindow* frame_window = nullptr;
+int frame_window_width_setting = 1280;
+int frame_window_heigth_setting = 720;
+std::string frame_window_title_setting = "Alberus Project";
+GLFWmonitor *frame_window_monitor_setting;
+GLFWwindow *frame_window_share_setting;
+
+
 ImGuiWindowFlags flags_minimize_and_exit_window =
     ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoScrollbar
     | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoBringToFrontOnFocus
@@ -21,17 +30,13 @@ ImGuiWindowFlags flags_demo_window = 0;
 ImGuiWindowFlags flags_esperimenti_window = 0; 
 ImGuiWindowFlags flags_window1 = 0; 
 ImGuiWindowFlags flags_menu_bar = 0; 
+ImGuiWindowFlags flags_tab_window = 0; 
+ImGuiWindowFlags flags_tree = 0; 
 
 
 
 
-// Frame_window
-GLFWwindow* frame_window = nullptr;
-int frame_window_width_setting = 1280;
-int frame_window_heigth_setting = 720;
-std::string frame_window_title_setting = "Alberus Project";
-GLFWmonitor *frame_window_monitor_setting;
-GLFWwindow *frame_window_share_setting;
+
 
 bool bool_minimize_and_exit_window      = false;
 bool bool_demo_window                   = false;
@@ -40,6 +45,9 @@ bool bool_window1                       = false;
 bool bool_login_window                  = false;
 bool bool_esperimenti_window            = false;
 bool bool_menu_bar                      = true;
+bool bool_tab_window                    = true;
+bool bool_Tree                          = true;
+
 
 
 

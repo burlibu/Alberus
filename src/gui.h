@@ -141,7 +141,9 @@ public:
 
 
 class SettingsWindow : public Window {
-    // TODO da implementare
+    SettingsWindow(ImVec2 p, ImVec2 s, GLFWwindow* win, ImGuiWindowFlags f);
+
+    void Render() override;
 };
 //! ///////////////////////////////////////////Minimize and exit window ///////////////////////////////////////////////
 class MinimizeAndExitWindow : public Window {
@@ -176,8 +178,31 @@ public:
 class MenuBar : public Window {
 public: 
     MenuBar(ImVec2 p, ImVec2 s, GLFWwindow* win, ImGuiWindowFlags f);
+    /**
+     * A quanto pare menubar ignora pos e size e si posiziona il alto a sinistra della finestra madre. Sempre
+     */
     void Render() override;
     bool checked;
+};
+
+class TabWindow : public Window {
+private:
+    bool tab1_open = true;
+    bool tab2_open = true;
+    bool tab3_open = true;
+
+public: 
+    TabWindow(const std::string& title, ImVec2 pos, ImVec2 size, GLFWwindow* win, ImGuiWindowFlags f);
+    
+
+    void Render() override;
+};
+
+class Tree : public Window {
+public:
+    Tree(const std::string& title, ImVec2 pos, ImVec2 size, GLFWwindow* win, ImGuiWindowFlags f);
+
+    void Render() override;
 };
 
 } // fine namespace Gui

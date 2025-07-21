@@ -55,7 +55,9 @@ int main() {
     Gui::showDemoWindow demoWindow(ImVec2(400,400), ImVec2(200,200), frame_window_manager.getWindow(),flags_demo_window);
     Gui::EsperimentiWindow esperimenti_window(ImVec2(300,300), ImVec2(200,200), frame_window_manager.getWindow(),flags_esperimenti_window);
     Gui::Window1 window1(ImVec2(100, 100), ImVec2(500, 400), frame_window_manager.getWindow(), flags_window1);
-    Gui::MenuBar menubar(ImVec2(0,0), ImVec2(600,350), frame_window_manager.getWindow(), flags_menu_bar);
+    Gui::MenuBar menubar(ImVec2(0,0), ImVec2(0,0), frame_window_manager.getWindow(), flags_menu_bar);
+    Gui::TabWindow tabWindow("TabWindow", ImVec2(100,100), ImVec2(500,400), frame_window_manager.getWindow(), flags_tab_window);
+    Gui::Tree tree("Tree", ImVec2(600,100), ImVec2(500,400), frame_window_manager.getWindow(), flags_tree);
      
 
     //* /////////////////////////////////////////////////////////// Loop principale ///////////////////////////////////////////////////////
@@ -116,6 +118,16 @@ int main() {
         if (bool_menu_bar) {
             menubar.Render();
         }
+
+    //////////////////////////////////////////////////////////// Tab Window /////////////////////////////////////////////////////////////////
+        if (bool_tab_window) {
+            tabWindow.Render();
+        }
+
+    /////////////////////////////////////////////////////////// Tree ////////////////////////////////////////////////////////////////////////
+    if (bool_Tree) {
+        tree.Render();
+    }
     // Rendering frame principale
     frame_window_manager.RenderFrame(blu);
     } // fine while principale

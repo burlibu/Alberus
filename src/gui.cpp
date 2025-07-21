@@ -270,8 +270,8 @@ namespace Gui {
                 }
                 ImGui::EndMenu();
             }
-            ImGui::SameLine();
-            if (ImGui::BeginMenu("Opzioni")) {
+            
+            if (ImGui::BeginMenu("Settings")) {
                 if (ImGui::MenuItem("Attiva funzione", NULL, &checked)) {
                     // checked viene aggiornato automaticamente
                 }
@@ -282,9 +282,70 @@ namespace Gui {
                 }
                 ImGui::EndMenu();
             }
+            ImGui::SameLine();
+            if (ImGui::BeginMenu("Help")) {
+                if (ImGui::MenuItem("What the fuck!", NULL, &checked)) {
+
+                }
+                ImGui::EndMenu();
+            }
             ImGui::EndMainMenuBar();
         }
     };
 
+    TabWindow::TabWindow(const std::string& title, ImVec2 pos, ImVec2 size, GLFWwindow* win, ImGuiWindowFlags f)
+    : Window(title, pos, size, win, f) {}
+
+    void TabWindow::Render(){
+        if (ImGui::Begin(title.c_str(), nullptr, flags)) {
+            if (ImGui::BeginTabBar("MyTabBar", ImGuiTabBarFlags_Reorderable)) {
+                // Tab fisso (non chiudibile)
+                if (ImGui::BeginTabItem("Generale")) {
+                    ImGui::Text("Contenuto tab generale");
+                    if (ImGui::Button("Azione 1")) {
+                        // Azione del bottone
+                    }
+                    ImGui::EndTabItem();
+                }
+
+                // Tab chiudibili
+                if (tab1_open && ImGui::BeginTabItem("Tab 1", &tab1_open)) {
+                    ImGui::Text("Contenuto tab 1");
+                    ImGui::EndTabItem();
+                }
+
+                if (tab2_open && ImGui::BeginTabItem("Tab 2", &tab2_open, ImGuiTabItemFlags_UnsavedDocument)) {
+                    ImGui::Text("Contenuto tab 2 (non salvato)");
+                    ImGui::EndTabItem();
+                }
+
+                if (tab3_open && ImGui::BeginTabItem("Tab 3", &tab3_open)) {
+                    ImGui::Text("Contenuto tab 3");
+                    ImGui::EndTabItem();
+                }
+
+                ImGui::EndTabBar();
+            }
+            ImGui::End();
+        }
+    }
+
+    Tree::Tree(const std::string& title, ImVec2 pos, ImVec2 size, GLFWwindow* win, ImGuiWindowFlags f)
+    : Window(title, pos, size, win, f) {}
+
+    void Tree::Render() {
+        if (ImGui::TreeNode("Nodo Principale")) {
+            ImGui::Text("Contenuto del nodo");
+            if (ImGui::TreeNode("Sotto-nodo 1")) {
+                ImGui::Text("Contenuto del sotto-nodo 1");
+                ImGui::TreePop();
+            }
+            if (ImGui::TreeNode("Sotto-nodo 2")) {
+                ImGui::Text("Contenuto del sotto-nodo 2");
+                ImGui::TreePop();
+            }
+            ImGui::TreePop();
+        }
+    }
 
 } // fine namespace gui
