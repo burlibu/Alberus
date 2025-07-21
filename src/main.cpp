@@ -55,6 +55,7 @@ int main() {
     Gui::showDemoWindow demoWindow(ImVec2(400,400), ImVec2(200,200), frame_window_manager.getWindow(),flags_demo_window);
     Gui::EsperimentiWindow esperimenti_window(ImVec2(300,300), ImVec2(200,200), frame_window_manager.getWindow(),flags_esperimenti_window);
     Gui::Window1 window1(ImVec2(100, 100), ImVec2(500, 400), frame_window_manager.getWindow(), flags_window1);
+    Gui::MenuBar menubar(ImVec2(0,0), ImVec2(600,350), frame_window_manager.getWindow(), flags_menu_bar);
      
 
     //* /////////////////////////////////////////////////////////// Loop principale ///////////////////////////////////////////////////////
@@ -111,6 +112,10 @@ int main() {
         }
         
 
+    ///////////////////////////////////////////////////////////// Menu Bar ///////////////////////////////////////////////////////////////
+        if (bool_menu_bar) {
+            menubar.Render();
+        }
     // Rendering frame principale
     frame_window_manager.RenderFrame(blu);
     } // fine while principale

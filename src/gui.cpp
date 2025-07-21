@@ -251,5 +251,40 @@ namespace Gui {
     ImGui::End();
     };
 
+    //////////////////////////////////////////////// MENU BAR ///////////////////////////////////////////////////////////////
+    MenuBar::MenuBar(ImVec2 p, ImVec2 s, GLFWwindow* win, ImGuiWindowFlags f)
+    : Window("MenuBar", p, s, win, f) {
+
+    }
+    void MenuBar::Render() {
+        if (ImGui::BeginMainMenuBar()) {
+            if (ImGui::BeginMenu("File")) {
+                if(ImGui::MenuItem("New")) {
+
+                }
+                if(ImGui::MenuItem("Open")) {
+                    
+                }
+                if(ImGui::MenuItem("Save")) {
+                    
+                }
+                ImGui::EndMenu();
+            }
+            ImGui::SameLine();
+            if (ImGui::BeginMenu("Opzioni")) {
+                if (ImGui::MenuItem("Attiva funzione", NULL, &checked)) {
+                    // checked viene aggiornato automaticamente
+                }
+                if (ImGui::BeginMenu("Sotto-menu")) {
+                    if (ImGui::MenuItem("Voce 1")) {}
+                    if (ImGui::MenuItem("Voce 2")) {}
+                    ImGui::EndMenu();
+                }
+                ImGui::EndMenu();
+            }
+            ImGui::EndMainMenuBar();
+        }
+    };
+
 
 } // fine namespace gui

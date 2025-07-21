@@ -20,6 +20,8 @@ ImGuiWindowFlags flags_my_window = 0;
 ImGuiWindowFlags flags_demo_window = 0;
 ImGuiWindowFlags flags_esperimenti_window = 0; 
 ImGuiWindowFlags flags_window1 = 0; 
+ImGuiWindowFlags flags_menu_bar = 0; 
+
 
 
 
@@ -31,12 +33,13 @@ std::string frame_window_title_setting = "Alberus Project";
 GLFWmonitor *frame_window_monitor_setting;
 GLFWwindow *frame_window_share_setting;
 
-bool bool_minimize_and_exit_window      = true;
-bool bool_demo_window                   = true;
-bool bool_my_window                     = true;
-bool bool_window1                       = true;
-bool bool_login_window                  = true;
-bool bool_esperimenti_window            = true;
+bool bool_minimize_and_exit_window      = false;
+bool bool_demo_window                   = false;
+bool bool_my_window                     = false;
+bool bool_window1                       = false;
+bool bool_login_window                  = false;
+bool bool_esperimenti_window            = false;
+bool bool_menu_bar                      = true;
 
 
 

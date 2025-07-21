@@ -173,4 +173,11 @@ public:
     void Render() override;
 };
 
+class MenuBar : public Window {
+public: 
+    MenuBar(ImVec2 p, ImVec2 s, GLFWwindow* win, ImGuiWindowFlags f);
+    void Render() override;
+    bool checked;
+};
+
 } // fine namespace Gui
