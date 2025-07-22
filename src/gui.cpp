@@ -271,9 +271,24 @@ namespace Gui {
                 ImGui::EndMenu();
             }
             
+            // Cambia lo sfondo della voce Settings quando la finestra è aperta
+            bool pushed_styles = false;
+            if (bool_settings) {
+                ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 1.0f, 1.0f, 1.0f));
+                ImGui::PushStyleColor(ImGuiCol_Header, ImVec4(0.0f, 0.8f, 0.0f, 1.0f));
+                ImGui::PushStyleColor(ImGuiCol_HeaderHovered, ImVec4(0.0f, 0.9f, 0.0f, 1.0f));
+                ImGui::PushStyleColor(ImGuiCol_HeaderActive, ImVec4(0.0f, 0.7f, 0.0f, 1.0f));
+                pushed_styles = true;
+            }
+            
             if (ImGui::MenuItem("Settings")) {
-                // open settings if bool_settings is false and the other way around
-                bool_settings = (bool_settings)? false : true;
+                // Alterna lo stato della finestra settings
+                bool_settings = !bool_settings;
+            }
+            
+            // Ripristina lo stile originale se era stato modificato
+            if (pushed_styles) {
+                ImGui::PopStyleColor(4); // Pop all 4 style colors that were pushed
             }
             ImGui::SameLine();
             if (ImGui::BeginMenu("Help")) {
@@ -289,7 +304,7 @@ namespace Gui {
     TabWindow::TabWindow(const std::string& title, ImVec2 pos, ImVec2 size, GLFWwindow* win, ImGuiWindowFlags f)
     : Window(title, pos, size, win, f) {}
 
-    void TabWindow::Render(){ //! BUG1
+    void TabWindow::Render(){
         if (ImGui::Begin(title.c_str(), nullptr, flags_tab_window)) {
             if (ImGui::BeginTabBar("MyTabBar", ImGuiTabBarFlags_Reorderable)) {
                 // Tab fisso (non chiudibile)
