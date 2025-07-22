@@ -31,7 +31,19 @@ ImGuiWindowFlags flags_esperimenti_window = 0;
 ImGuiWindowFlags flags_window1 = 0; 
 ImGuiWindowFlags flags_menu_bar = 0; 
 ImGuiWindowFlags flags_tab_window = 0; 
-ImGuiWindowFlags flags_tree = 0; 
+ImGuiWindowFlags flags_tree = 0;
+ImGuiWindowFlags flags_table = 0;
+// ImGuiTableFlags_Borders | ImGuiTableFlags_RowBg | ImGuiTableFlags_Resizable | ImGuiTableFlags_Sortable
+
+ImGuiWindowFlags flags_settings = 0;
+
+// Settings window arrays for dropdown menus
+const char* languages[] = { "English", "Italian", "Spanish", "French", "German" };
+const char* resolutions[] = { "1280x720", "1366x768", "1600x900", "1920x1080", "2560x1440", "3840x2160" };
+const char* antialiasing_options[] = { "Off", "FXAA", "MSAA 2x", "MSAA 4x", "MSAA 8x" };
+const char* notification_positions[] = { "Top Right", "Top Left", "Bottom Right", "Bottom Left" };
+
+
 
 
 
@@ -47,6 +59,9 @@ bool bool_esperimenti_window            = false;
 bool bool_menu_bar                      = true;
 bool bool_tab_window                    = true;
 bool bool_Tree                          = true;
+bool bool_table                         = true;
+bool bool_settings                      = true;
+
 
 
 

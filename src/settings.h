@@ -28,9 +28,10 @@ extern ImGuiWindowFlags flags_window1;
 extern ImGuiWindowFlags flags_menu_bar;
 extern ImGuiWindowFlags flags_tab_window; 
 extern ImGuiWindowFlags flags_tree; 
+extern ImGuiWindowFlags flags_table; 
+extern ImGuiWindowFlags flags_settings;
 
-
-
+// Bools
 extern bool bool_minimize_and_exit_window;
 extern bool bool_demo_window;
 extern bool bool_my_window;
@@ -40,9 +41,14 @@ extern bool bool_esperimenti_window;
 extern bool bool_menu_bar;
 extern bool bool_tab_window;
 extern bool bool_Tree;
+extern bool bool_table;
+extern bool bool_settings;
 
-
-
+// Settings window arrays for dropdown menus
+extern const char* languages[5];
+extern const char* resolutions[6];
+extern const char* antialiasing_options[5];
+extern const char* notification_positions[4];
 
 // Impostazioni Window 1 
 extern float value1;

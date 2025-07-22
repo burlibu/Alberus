@@ -141,8 +141,47 @@ public:
 
 
 class SettingsWindow : public Window {
-    SettingsWindow(ImVec2 p, ImVec2 s, GLFWwindow* win, ImGuiWindowFlags f);
+private:
+    // General settings
+    bool dark_theme = true;
+    float global_scale = 1.0f;
+    int language_index = 0;
+    
+    // Display settings
+    bool vsync = true;
+    bool fullscreen = false;
+    int resolution_index = 0;
+    float brightness = 1.0f;
+    float contrast = 1.0f;
+    
+    // Audio settings
+    float master_volume = 0.8f;
+    float music_volume = 0.7f;
+    float effects_volume = 0.9f;
+    bool mute = false;
+    
+    // Advanced settings
+    int antialiasing_index = 0;
+    bool motion_blur = false;
+    float shadow_quality = 0.5f;
+    bool advanced_lighting = true;
+    
+    // Notification settings
+    bool show_notifications = true;
+    float notification_duration = 3.0f;
+    int notification_position_index = 0;
+    
+    // Save settings function
+    void SaveSettings();
+    
+    // Reset settings function
+    void ResetToDefaults();
+    
+    // Current active tab
+    int active_tab = 0;
 
+public:
+    SettingsWindow(ImVec2 p, ImVec2 s, GLFWwindow* win, ImGuiWindowFlags f);
     void Render() override;
 };
 //! ///////////////////////////////////////////Minimize and exit window ///////////////////////////////////////////////
@@ -205,4 +244,13 @@ public:
     void Render() override;
 };
 
-} // fine namespace Gui
+class Table : public Window {
+public:
+    Table(const std::string& title, ImVec2 pos, ImVec2 size, GLFWwindow* win, ImGuiWindowFlags f);
+
+    void Render() override;
+};
+
+
+
+;} // fine namespace Gui

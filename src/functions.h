@@ -56,9 +56,9 @@ void style();
  *  e possono essere utilizzate per informare l'utente su eventi, errori o
  *  conferme di azioni.
  *
- *  @param[in] title Il titolo della notifica, visualizzato in grassetto.
- *  @param[in] text Il testo del messaggio della notifica.
- *  @param[in] duration_ms La durata di visualizzazione in millisecondi.
+ *  @param[in] title const std::string& Il titolo della notifica, visualizzato in grassetto.
+ *  @param[in] text const std::string& Il testo del messaggio della notifica.
+ *  @param[in] duration_ms int La durata di visualizzazione in millisecondi.
  *
  *  @errors Nessun errore specifico, ma se la memoria è insufficiente la notifica
  *  potrebbe non essere creata.
@@ -72,7 +72,7 @@ void style();
  *
  *  @ingroup notifications
  */
-void showNotification(); //MEMO6
+void showNotification(const std::string& title, const std::string& text, int duration_ms); //MEMO6
 /**
  * @brief Funzione che prende una stringa colore come bde0fe o bde0fe80 e ritorna un ImVec4 corrispettivo 
  * @param[in] n numero intero per calcolo fattoriale >= 0
