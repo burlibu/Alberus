@@ -59,7 +59,11 @@ int main() {
     Gui::TabWindow tabWindow("TabWindow", ImVec2(100,100), ImVec2(500,400), frame_window_manager.getWindow(), flags_tab_window);
     Gui::Tree tree("Tree", ImVec2(600,100), ImVec2(500,400), frame_window_manager.getWindow(), flags_tree);
     Gui::Table table("Table", ImVec2(100,100), ImVec2(500,400), frame_window_manager.getWindow(), flags_table);
-    Gui::SettingsWindow settingsWindow(ImVec2(200,150), ImVec2(700,500), frame_window_manager.getWindow(), flags_settings);
+    Gui::SettingsWindow settingsWindow(ImVec2(0,0 + menubar.GetPos().y), ImVec2(frame_window_manager.frame_window_width,frame_window_manager.frame_window_heigth - menubar.GetPos().y), frame_window_manager.getWindow(), flags_settings);
+
+
+
+
 
 
      

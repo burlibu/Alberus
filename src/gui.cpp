@@ -271,19 +271,9 @@ namespace Gui {
                 ImGui::EndMenu();
             }
             
-            if (ImGui::BeginMenu("Settings")) {
-                if (ImGui::MenuItem("Open Settings Window", NULL, &bool_settings)) {
-                    // This will toggle the settings window visibility
-                }
-                if (ImGui::MenuItem("Attiva funzione", NULL, &checked)) {
-                    // checked viene aggiornato automaticamente
-                }
-                if (ImGui::BeginMenu("Sotto-menu")) {
-                    if (ImGui::MenuItem("Voce 1")) {}
-                    if (ImGui::MenuItem("Voce 2")) {}
-                    ImGui::EndMenu();
-                }
-                ImGui::EndMenu();
+            if (ImGui::MenuItem("Settings")) {
+                // open settings if bool_settings is false and the other way around
+                bool_settings = (bool_settings)? false : true;
             }
             ImGui::SameLine();
             if (ImGui::BeginMenu("Help")) {
@@ -417,8 +407,17 @@ namespace Gui {
     }
 
     void SettingsWindow::Render() {
-        ImGui::SetNextWindowPos(pos, ImGuiCond_FirstUseEver);
-        ImGui::SetNextWindowSize(size, ImGuiCond_FirstUseEver);
+        // Aggiorna le dimensioni della finestra in base al frame principale
+        int current_width, current_height;
+        glfwGetFramebufferSize(window_ptr, &current_width, &current_height);
+        
+        // Calcola la posizione e dimensione in base al frame attuale
+        ImVec2 current_pos = ImVec2(0, menubar_height);
+        ImVec2 current_size = ImVec2(current_width, current_height - menubar_height);
+        
+        // Imposta la posizione e dimensione aggiornate
+        ImGui::SetNextWindowPos(current_pos);
+        ImGui::SetNextWindowSize(current_size);
         
         if (ImGui::Begin(title.c_str(), &isOpen, flags_settings)) {
             // Apply custom style for settings window

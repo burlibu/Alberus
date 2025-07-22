@@ -179,6 +179,9 @@ private:
     
     // Current active tab
     int active_tab = 0;
+    
+    // Altezza della barra dei menu per il posizionamento
+    float menubar_height = 19.0f; // Altezza standard della barra dei menu di ImGui
 
 public:
     SettingsWindow(ImVec2 p, ImVec2 s, GLFWwindow* win, ImGuiWindowFlags f);

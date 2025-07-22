@@ -35,7 +35,9 @@ ImGuiWindowFlags flags_tree = 0;
 ImGuiWindowFlags flags_table = 0;
 // ImGuiTableFlags_Borders | ImGuiTableFlags_RowBg | ImGuiTableFlags_Resizable | ImGuiTableFlags_Sortable
 
-ImGuiWindowFlags flags_settings = 0;
+ImGuiWindowFlags flags_settings =  ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoScrollbar
+    | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoBringToFrontOnFocus
+    | ImGuiWindowFlags_NoFocusOnAppearing | ImGuiWindowFlags_NoNav;
 
 // Settings window arrays for dropdown menus
 const char* languages[] = { "English", "Italian", "Spanish", "French", "German" };
@@ -60,7 +62,7 @@ bool bool_menu_bar                      = true;
 bool bool_tab_window                    = true;
 bool bool_Tree                          = true;
 bool bool_table                         = true;
-bool bool_settings                      = true;
+bool bool_settings                      = false;
 
 
 
