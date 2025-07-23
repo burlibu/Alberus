@@ -21,8 +21,8 @@ namespace Gui {
  */
 class FrameWindowManager {
 public:
-    int frame_window_width; // la larghezza del frame
-    int frame_window_heigth; // l' altezza del frame
+    int frame_window_width; // la larghezza del frame fww
+    int frame_window_heigth; // l' altezza del frame fwh
     std::string title; // titolo del frame
     GLFWmonitor *monitor;  // The monitor to use for full screen mode, or NULL for windowed mode.
     GLFWwindow *share;  // The window whose context to share resources with, or NULL to not share resources
@@ -256,7 +256,7 @@ public:
 
 class BottomBar : public Window {
 public: 
-    float width = 35.0f;
+    float height = 35.0f;
     BottomBar(const std::string& title, ImVec2 pos, ImVec2 size, GLFWwindow* win, ImGuiWindowFlags f);
     void Render() override;
 };

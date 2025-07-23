@@ -44,7 +44,7 @@ int main() {
     ImGui_ImplGlfw_InitForOpenGL(frame_window_manager.getWindow(), true);
     ImGui_ImplOpenGL3_Init("#version 130");
 
-    //calcolo width and heigth finestra
+    //calcolo width and heigth finestra in tempo reale
     int frame_width, frame_height;
     glfwGetFramebufferSize(frame_window_manager.getWindow(), &frame_width, &frame_height);
     GLFWwindow* frame_p = frame_window_manager.getWindow(); // pointer to the frame
@@ -61,7 +61,7 @@ int main() {
     Gui::Tree tree("Tree", ImVec2(600,100), ImVec2(500,400), frame_p, flags_tree);
     Gui::Table table("Table", ImVec2(100,100), ImVec2(500,400), frame_p, flags_table);
     Gui::SettingsWindow settingsWindow(ImVec2(0,0 + menubar.GetPos().y), ImVec2(frame_window_manager.frame_window_width,frame_window_manager.frame_window_heigth - menubar.GetPos().y), frame_p, flags_settings);
-    Gui::BottomBar bottomBar("BottomBar", ImVec2(0, (frame_height - 35.0f)), ImVec2(frame_width, 35.0f), frame_p, flags_BottomBar);
+    Gui::BottomBar bottomBar("BomboClap", ImVec2(500,500), ImVec2(frame_width, 35.0f), frame_p, flags_BottomBar);
 
 
 
@@ -152,6 +152,8 @@ int main() {
     {
         bottomBar.Render();
     }
+
+    Rectangle(ImVec2(100,100), ImVec2(200,200), viola);
     
 
     // Rendering frame principale

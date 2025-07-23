@@ -31,6 +31,7 @@ extern ImGuiWindowFlags flags_tree;
 extern ImGuiWindowFlags flags_table; 
 extern ImGuiWindowFlags flags_settings;
 extern ImGuiWindowFlags flags_BottomBar;
+extern ImGuiWindowFlags flags_rectangle;
 
 // Bools
 extern bool bool_minimize_and_exit_window;

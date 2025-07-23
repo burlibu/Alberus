@@ -231,3 +231,11 @@ bool checkWindowSizeChange(const ImVec2& currentSize, float checkIntervalSeconds
  * Prende il puntatore ad una finestra e ne restituisce le coordinate in mezzo 
  */
 ImVec2 CenterPosWindow(ImVec2 imvec2, GLFWwindow* window_ptr);
+/**
+ * Creates a Rectangle (formally a window)from a position and a size
+ * @param pos position of the rectangle
+ * @param size size of the rectangle
+ * @param col color of the rectangle
+ * @return Error
+ */
+Error Rectangle(const ImVec2& pos, const ImVec2& size, color col);

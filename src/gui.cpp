@@ -605,9 +605,16 @@ namespace Gui {
     }
 
     void BottomBar::Render() {
+        int frame_current_width, frame_current_height;
+        glfwGetFramebufferSize(window_ptr, &frame_current_width, &frame_current_height);
+        pos = ImVec2(0, frame_current_height - height);
+        size = ImVec2(frame_current_width, height);
+        ImGui::SetNextWindowPos(pos, ImGuiCond_Always);
+        ImGui::SetNextWindowSize(size, ImGuiCond_Always);
+        ImGui::PushStyleColor(ImGuiCol_WindowBg, rosso);
         ImGui::Begin(title.c_str(), &bool_BottomBar , flags_BottomBar);
-
         ImGui::End();
+        ImGui::PopStyleColor();
     }
 
 } // fine namespace gui

@@ -174,9 +174,9 @@ bool checkWindowSizeChange(const ImVec2& currentSize, float checkIntervalSeconds
 }
 
 // TODO
-ImVec2 CenterPosWindow(ImVec2 imvec2, GLFWwindow* window_ptr) {
+// ImVec2 CenterPosWindow(ImVec2 imvec2, GLFWwindow* window_ptr) {
 
-}
+// }
 
 /**
  * Trova il numero mancante in un array da 1 a n-1 usando lo xor trick
@@ -187,5 +187,15 @@ ImVec2 CenterPosWindow(ImVec2 imvec2, GLFWwindow* window_ptr) {
 //     b ^= c;
 // }
 
+Error Rectangle(const ImVec2& pos, const ImVec2& size, color col) {
+    bool bool_rect = true;
+    ImGui::SetNextWindowPos(pos);
+    ImGui::SetNextWindowSize(size);
+    ImGui::PushStyleColor(ImGuiCol_WindowBg, col);
+    ImGui::Begin("rectangle", &bool_rect, flags_rectangle);
+    ImGui::End();
+    ImGui::PopStyleColor();
+    return Error::OK;
+}
 
 
