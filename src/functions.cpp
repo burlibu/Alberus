@@ -188,11 +188,18 @@ bool checkWindowSizeChange(const ImVec2& currentSize, float checkIntervalSeconds
 // }
 
 Error Rectangle(const ImVec2& pos, const ImVec2& size, color col) {
+    
+    
     bool bool_rect = true;
     ImGui::SetNextWindowPos(pos);
     ImGui::SetNextWindowSize(size);
     ImGui::PushStyleColor(ImGuiCol_WindowBg, col);
-    ImGui::Begin("rectangle", &bool_rect, flags_rectangle);
+    
+    // Crea un ID unico per ogni rettangolo
+    element_id++;
+    std::string rectangle_id = "rectangle_" + std::to_string(element_id);
+    
+    ImGui::Begin(rectangle_id.c_str(), &bool_rect, flags_rectangle);
     ImGui::End();
     ImGui::PopStyleColor();
     return Error::OK;

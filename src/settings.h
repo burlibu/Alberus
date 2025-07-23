@@ -65,3 +65,5 @@ extern int my_int;
 
 extern const std::string username;
 extern const std::string password;
+
+extern int element_id;

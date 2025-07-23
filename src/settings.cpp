@@ -90,3 +90,5 @@ int my_int = 0;
 
 const std::string username = "admin";
 const std::string password = "password";
+
+int element_id = 0;

@@ -253,7 +253,7 @@ namespace Gui {
 
     //////////////////////////////////////////////// MENU BAR ///////////////////////////////////////////////////////////////
     MenuBar::MenuBar(ImVec2 p, ImVec2 s, GLFWwindow* win, ImGuiWindowFlags f)
-    : Window("MenuBar", p, s, win, f) {
+    : Window("MenuBar", p, s, win, f), checked(false) {
 
     }
     void MenuBar::Render() {
@@ -434,7 +434,7 @@ namespace Gui {
         ImGui::SetNextWindowPos(current_pos);
         ImGui::SetNextWindowSize(current_size);
         
-        if (ImGui::Begin(title.c_str(), &isOpen, flags_settings)) {
+        if (ImGui::Begin(title.c_str(), NULL, flags_settings)) {
             // Apply custom style for settings window
             ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(10, 6));
             ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(10, 10));

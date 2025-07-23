@@ -154,6 +154,13 @@ int main() {
     }
 
     Rectangle(ImVec2(100,100), ImVec2(200,200), viola);
+    Rectangle(ImVec2(600,100), ImVec2(100,200), rosso);
+    Rectangle(ImVec2(300,500), ImVec2(100,50), blu_chiaro);
+    Rectangle(ImVec2(400,500), ImVec2(100,50), verde);
+    Rectangle(ImVec2(500,500), ImVec2(100,50), rosa);
+
+
+
     
 
     // Rendering frame principale
