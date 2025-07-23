@@ -334,8 +334,8 @@ namespace Gui {
 
                 ImGui::EndTabBar();
             }
-            ImGui::End();
         }
+        ImGui::End();
     }
 
     Tree::Tree(const std::string& title, ImVec2 pos, ImVec2 size, GLFWwindow* win, ImGuiWindowFlags f)
@@ -596,6 +596,17 @@ namespace Gui {
             ImGui::PopStyleVar(2); // Pop the style variables we pushed earlier
         }
         
+        ImGui::End();
+    }
+
+    BottomBar::BottomBar(const std::string& title, ImVec2 pos, ImVec2 size, GLFWwindow* win, ImGuiWindowFlags f)
+    : Window(title, pos, size, win, f) {
+        
+    }
+
+    void BottomBar::Render() {
+        ImGui::Begin(title.c_str(), &bool_BottomBar , flags_BottomBar);
+
         ImGui::End();
     }
 

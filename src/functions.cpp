@@ -181,11 +181,11 @@ ImVec2 CenterPosWindow(ImVec2 imvec2, GLFWwindow* window_ptr) {
 /**
  * Trova il numero mancante in un array da 1 a n-1 usando lo xor trick
  */
-int findMissingNumber(uint8_t a[]) {
-    int size = sizeof(a) / 8;
-    int b,c;
-    b ^= c;
-}
+// int findMissingNumber(uint8_t a[]) {
+//     int size = sizeof(a) / 8;
+//     int b,c;
+//     b ^= c;
+// }
 
 
 

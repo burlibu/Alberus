@@ -39,6 +39,9 @@ ImGuiWindowFlags flags_settings =  ImGuiWindowFlags_NoResize | ImGuiWindowFlags_
     | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoBringToFrontOnFocus
     | ImGuiWindowFlags_NoFocusOnAppearing | ImGuiWindowFlags_NoNav;
 
+ImGuiWindowFlags flags_BottomBar = ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoBringToFrontOnFocus
+    | ImGuiWindowFlags_NoFocusOnAppearing | ImGuiWindowFlags_NoNav | ImGuiWindowFlags_NoMove;
+    
 // Settings window arrays for dropdown menus
 const char* languages[] = { "English", "Italian", "Spanish", "French", "German" };
 const char* resolutions[] = { "1280x720", "1366x768", "1600x900", "1920x1080", "2560x1440", "3840x2160" };
@@ -63,8 +66,7 @@ bool bool_tab_window                    = true;
 bool bool_Tree                          = true;
 bool bool_table                         = true;
 bool bool_settings                      = false;
-
-
+bool bool_BottomBar                    = true;
 
 
 

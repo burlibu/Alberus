@@ -254,6 +254,13 @@ public:
     void Render() override;
 };
 
+class BottomBar : public Window {
+public: 
+    float width = 35.0f;
+    BottomBar(const std::string& title, ImVec2 pos, ImVec2 size, GLFWwindow* win, ImGuiWindowFlags f);
+    void Render() override;
+};
+
 
 
 ;} // fine namespace Gui

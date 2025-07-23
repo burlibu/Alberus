@@ -30,6 +30,7 @@ extern ImGuiWindowFlags flags_tab_window;
 extern ImGuiWindowFlags flags_tree; 
 extern ImGuiWindowFlags flags_table; 
 extern ImGuiWindowFlags flags_settings;
+extern ImGuiWindowFlags flags_BottomBar;
 
 // Bools
 extern bool bool_minimize_and_exit_window;
@@ -43,6 +44,7 @@ extern bool bool_tab_window;
 extern bool bool_Tree;
 extern bool bool_table;
 extern bool bool_settings;
+extern bool bool_BottomBar;
 
 // Settings window arrays for dropdown menus
 extern const char* languages[5];

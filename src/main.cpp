@@ -45,21 +45,24 @@ int main() {
     ImGui_ImplOpenGL3_Init("#version 130");
 
     //calcolo width and heigth finestra
-    int minimize_and_exit_window_w, minimize_and_exit_window_h;
-    glfwGetFramebufferSize(frame_window_manager.getWindow(), &minimize_and_exit_window_w, &minimize_and_exit_window_h);
+    int frame_width, frame_height;
+    glfwGetFramebufferSize(frame_window_manager.getWindow(), &frame_width, &frame_height);
+    GLFWwindow* frame_p = frame_window_manager.getWindow(); // pointer to the frame
 
     // Istanziazione classi finestre
-    Gui::MinimizeAndExitWindow minimize_and_exit_window(ImVec2(0,0),ImVec2(minimize_and_exit_window_w,35.0f), frame_window_manager.getWindow(),flags_minimize_and_exit_window);
-    Gui::LoginWindow loginWin(ImVec2(100, 100), ImVec2(500, 400), frame_window_manager.getWindow(), flags_login_window);
-    Gui::ShowMyWindow mywin(ImVec2(100, 100), ImVec2(500, 400), frame_window_manager.getWindow(), flags_my_window); // classe loginWindow creata
-    Gui::showDemoWindow demoWindow(ImVec2(400,400), ImVec2(200,200), frame_window_manager.getWindow(),flags_demo_window);
-    Gui::EsperimentiWindow esperimenti_window(ImVec2(300,300), ImVec2(200,200), frame_window_manager.getWindow(),flags_esperimenti_window);
-    Gui::Window1 window1(ImVec2(100, 100), ImVec2(500, 400), frame_window_manager.getWindow(), flags_window1);
-    Gui::MenuBar menubar(ImVec2(0,0), ImVec2(0,0), frame_window_manager.getWindow(), flags_menu_bar);
-    Gui::TabWindow tabWindow("TabWindow", ImVec2(100,100), ImVec2(500,400), frame_window_manager.getWindow(), flags_tab_window);
-    Gui::Tree tree("Tree", ImVec2(600,100), ImVec2(500,400), frame_window_manager.getWindow(), flags_tree);
-    Gui::Table table("Table", ImVec2(100,100), ImVec2(500,400), frame_window_manager.getWindow(), flags_table);
-    Gui::SettingsWindow settingsWindow(ImVec2(0,0 + menubar.GetPos().y), ImVec2(frame_window_manager.frame_window_width,frame_window_manager.frame_window_heigth - menubar.GetPos().y), frame_window_manager.getWindow(), flags_settings);
+    Gui::MinimizeAndExitWindow minimize_and_exit_window(ImVec2(0,0),ImVec2(frame_width,35.0f), frame_p,flags_minimize_and_exit_window);
+    Gui::LoginWindow loginWin(ImVec2(100, 100), ImVec2(500, 400), frame_p, flags_login_window);
+    Gui::ShowMyWindow mywin(ImVec2(100, 100), ImVec2(500, 400), frame_p, flags_my_window); // classe loginWindow creata
+    Gui::showDemoWindow demoWindow(ImVec2(400,400), ImVec2(200,200), frame_p,flags_demo_window);
+    Gui::EsperimentiWindow esperimenti_window(ImVec2(300,300), ImVec2(200,200), frame_p,flags_esperimenti_window);
+    Gui::Window1 window1(ImVec2(100, 100), ImVec2(500, 400), frame_p, flags_window1);
+    Gui::MenuBar menubar(ImVec2(0,0), ImVec2(0,0), frame_p, flags_menu_bar);
+    Gui::TabWindow tabWindow("TabWindow", ImVec2(100,100), ImVec2(500,400), frame_p, flags_tab_window);
+    Gui::Tree tree("Tree", ImVec2(600,100), ImVec2(500,400), frame_p, flags_tree);
+    Gui::Table table("Table", ImVec2(100,100), ImVec2(500,400), frame_p, flags_table);
+    Gui::SettingsWindow settingsWindow(ImVec2(0,0 + menubar.GetPos().y), ImVec2(frame_window_manager.frame_window_width,frame_window_manager.frame_window_heigth - menubar.GetPos().y), frame_p, flags_settings);
+    Gui::BottomBar bottomBar("BottomBar", ImVec2(0, (frame_height - 35.0f)), ImVec2(frame_width, 35.0f), frame_p, flags_BottomBar);
+
 
 
 
@@ -144,6 +147,12 @@ int main() {
     if (bool_settings) {
         settingsWindow.Render();
     }
+
+    if (bool_BottomBar)
+    {
+        bottomBar.Render();
+    }
+    
 
     // Rendering frame principale
     frame_window_manager.RenderFrame(blu);
