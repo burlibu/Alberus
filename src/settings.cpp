@@ -35,9 +35,15 @@ ImGuiWindowFlags flags_tree = 0;
 ImGuiWindowFlags flags_table = 0;
 // ImGuiTableFlags_Borders | ImGuiTableFlags_RowBg | ImGuiTableFlags_Resizable | ImGuiTableFlags_Sortable
 
-ImGuiWindowFlags flags_settings =  ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoScrollbar
-    | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoBringToFrontOnFocus
-    | ImGuiWindowFlags_NoFocusOnAppearing | ImGuiWindowFlags_NoNav;
+ImGuiWindowFlags flags_settings =  
+  ImGuiWindowFlags_NoResize 
+| ImGuiWindowFlags_NoMove 
+| ImGuiWindowFlags_NoScrollbar
+| ImGuiWindowFlags_NoSavedSettings 
+| ImGuiWindowFlags_NoCollapse 
+// | ImGuiWindowFlags_NoBringToFrontOnFocus
+| ImGuiWindowFlags_NoFocusOnAppearing 
+| ImGuiWindowFlags_NoNav;
 
 ImGuiWindowFlags flags_BottomBar = 
     ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoScrollbar

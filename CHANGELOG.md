@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Version 0.01
+## Version 0.0.1
 
 ### 12/7/2025
 
@@ -9,7 +9,7 @@
 
 ---
 
-## Version 0.02
+## Version 0.0.2
 
 ### 13/7/2025
 
@@ -19,7 +19,7 @@
 
 ---
 
-## Version 0.03
+## Version 0.0.3
 
 ### 16/7/2025
 
@@ -29,3 +29,5 @@
 - TODO: All' avvio mostrare solo il login e mostrare le altre finestre dopo il login.
 
 ---
+
+## Version 0.0.4
