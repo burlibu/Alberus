@@ -20,9 +20,15 @@ GLFWwindow *frame_window_share_setting;
 
 
 ImGuiWindowFlags flags_minimize_and_exit_window =
-    ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoScrollbar
-    | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoBringToFrontOnFocus
-    | ImGuiWindowFlags_NoFocusOnAppearing | ImGuiWindowFlags_NoNav;
+    ImGuiWindowFlags_NoTitleBar 
+    | ImGuiWindowFlags_NoResize 
+    | ImGuiWindowFlags_NoMove 
+    | ImGuiWindowFlags_NoScrollbar
+    | ImGuiWindowFlags_NoSavedSettings 
+    | ImGuiWindowFlags_NoCollapse 
+    | ImGuiWindowFlags_NoBringToFrontOnFocus
+    | ImGuiWindowFlags_NoFocusOnAppearing 
+    | ImGuiWindowFlags_NoNav;
   
 ImGuiWindowFlags flags_login_window = 0; 
 ImGuiWindowFlags flags_my_window = 0; 
@@ -46,14 +52,36 @@ ImGuiWindowFlags flags_settings =
 | ImGuiWindowFlags_NoNav;
 
 ImGuiWindowFlags flags_BottomBar = 
-    ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoScrollbar
-    | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoBringToFrontOnFocus
-    | ImGuiWindowFlags_NoFocusOnAppearing | ImGuiWindowFlags_NoNav;
+    ImGuiWindowFlags_NoTitleBar 
+    | ImGuiWindowFlags_NoResize 
+    | ImGuiWindowFlags_NoMove 
+    | ImGuiWindowFlags_NoScrollbar
+    | ImGuiWindowFlags_NoSavedSettings 
+    | ImGuiWindowFlags_NoCollapse 
+    | ImGuiWindowFlags_NoBringToFrontOnFocus
+    | ImGuiWindowFlags_NoFocusOnAppearing 
+    | ImGuiWindowFlags_NoNav;
 
 ImGuiWindowFlags flags_rectangle = 
-    ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoScrollbar
-    | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoBringToFrontOnFocus
-    | ImGuiWindowFlags_NoFocusOnAppearing | ImGuiWindowFlags_NoNav;
+    ImGuiWindowFlags_NoTitleBar 
+    | ImGuiWindowFlags_NoResize 
+    | ImGuiWindowFlags_NoMove 
+    | ImGuiWindowFlags_NoScrollbar
+    | ImGuiWindowFlags_NoSavedSettings 
+    | ImGuiWindowFlags_NoCollapse 
+    | ImGuiWindowFlags_NoBringToFrontOnFocus
+    | ImGuiWindowFlags_NoFocusOnAppearing 
+    | ImGuiWindowFlags_NoNav;
+
+    ImGuiWindowFlags flags_HelpWindow = 
+      ImGuiWindowFlags_NoResize 
+    | ImGuiWindowFlags_NoMove 
+    | ImGuiWindowFlags_NoScrollbar
+    | ImGuiWindowFlags_NoSavedSettings 
+    | ImGuiWindowFlags_NoCollapse 
+    // | ImGuiWindowFlags_NoBringToFrontOnFocus
+    | ImGuiWindowFlags_NoFocusOnAppearing 
+    | ImGuiWindowFlags_NoNav;
     
 // Settings window arrays for dropdown menus
 const char* languages[] = { "English", "Italian", "Spanish", "French", "German" };
@@ -79,7 +107,8 @@ bool bool_tab_window                    = true;
 bool bool_Tree                          = true;
 bool bool_table                         = true;
 bool bool_settings                      = false;
-bool bool_BottomBar                    = true;
+bool bool_BottomBar                     = true;
+bool bool_HelpWindow                    = false;
 
 
 

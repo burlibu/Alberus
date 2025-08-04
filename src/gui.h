@@ -261,6 +261,13 @@ public:
     void Render() override;
 };
 
+class HelpWindow : public Window {
+private:
+    float menubar_height = 19.0f; // Altezza standard della barra dei menu di ImGui //TODO da spostare in una variabile esterna
+public:
+    HelpWindow(const std::string& title, ImVec2 pos, ImVec2 size, GLFWwindow* win, ImGuiWindowFlags f);
+    void Render() override;
+};
 
 
 ;} // fine namespace Gui

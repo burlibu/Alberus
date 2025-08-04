@@ -62,6 +62,8 @@ Gui::Tree tree("Tree", ImVec2(600,100), ImVec2(500,400), frame_p, flags_tree);
 Gui::Table table("Table", ImVec2(100,100), ImVec2(500,400), frame_p, flags_table);
 Gui::SettingsWindow settingsWindow(ImVec2(0,0 + menubar.GetPos().y), ImVec2(frame_window_manager.frame_window_width,frame_window_manager.frame_window_heigth - menubar.GetPos().y), frame_p, flags_settings);
 Gui::BottomBar bottomBar("BomboClap", ImVec2(500,500), ImVec2(frame_width, 35.0f), frame_p, flags_BottomBar);
+Gui::HelpWindow helpWindow("Help", ImVec2(0,0 + menubar.GetPos().y), ImVec2(frame_window_manager.frame_window_width,frame_window_manager.frame_window_heigth - menubar.GetPos().y), frame_p, flags_HelpWindow);
+
 
 
 
@@ -147,18 +149,21 @@ table.Render();
 if (bool_settings) {
 settingsWindow.Render();
 }
-
+if (bool_HelpWindow)
+{
+helpWindow.Render();
+}
 if (bool_BottomBar)
 {
 bottomBar.Render();
 }
 element_id = 0;
 
-Rectangle(ImVec2(100,100), ImVec2(200,200), viola);
-Rectangle(ImVec2(600,100), ImVec2(100,200), rosso);
-Rectangle(ImVec2(300,500), ImVec2(100,50), blu_chiaro);
-Rectangle(ImVec2(400,500), ImVec2(100,50), verde);
-Rectangle(ImVec2(500,500), ImVec2(100,50), rosa);
+// Rectangle(ImVec2(100,100), ImVec2(200,200), viola);
+// Rectangle(ImVec2(600,100), ImVec2(100,200), rosso);
+// Rectangle(ImVec2(300,500), ImVec2(100,50), blu_chiaro);
+// Rectangle(ImVec2(400,500), ImVec2(100,50), verde);
+// Rectangle(ImVec2(500,500), ImVec2(100,50), rosa);
 
 
 
