@@ -12,8 +12,8 @@
 
 // Frame_window
 GLFWwindow* frame_window = nullptr;
-int frame_window_width_setting = 1280;
-int frame_window_heigth_setting = 720;
+int frame_window_width_setting = 2520;
+int frame_window_heigth_setting = 1380;
 std::string frame_window_title_setting = "Alberus Project";
 GLFWmonitor *frame_window_monitor_setting;
 GLFWwindow *frame_window_share_setting;

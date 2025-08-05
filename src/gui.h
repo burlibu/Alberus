@@ -177,6 +177,8 @@ private:
     // Reset settings function
     void ResetToDefaults();
     
+    void ApplyDisplaySettings();
+    
     // Current active tab
     int active_tab = 0;
     

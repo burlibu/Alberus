@@ -386,6 +386,8 @@ namespace Gui {
 
     void SettingsWindow::SaveSettings() {
         // Here you would implement saving settings to a file or database
+        ApplyDisplaySettings();
+
         showNotification("Settings", "Settings saved successfully!", 3000);
     }
 
@@ -417,6 +419,42 @@ namespace Gui {
         
         showNotification("Settings", "Settings reset to defaults!", 3000);
     }
+
+    void SettingsWindow::ApplyDisplaySettings() {
+    // Ottieni le dimensioni dal dropdown delle risoluzioni
+    int width, height;
+    switch(resolution_index) {
+        case 0: width = 1280; height = 720; break;
+        case 1: width = 1366; height = 768; break;
+        case 2: width = 1600; height = 900; break;
+        case 3: width = 1920; height = 1080; break;
+        case 4: width = 2560; height = 1440; break;
+        case 5: width = 3840; height = 2160; break;
+        default: width = 1920; height = 1080; break;
+    }
+    
+    if (fullscreen) {
+        // Modalità fullscreen
+        GLFWmonitor* monitor = glfwGetPrimaryMonitor();
+        const GLFWvidmode* mode = glfwGetVideoMode(monitor);
+        glfwSetWindowMonitor(window_ptr, monitor, 0, 0, mode->width, mode->height, mode->refreshRate);
+    } else {
+        // Modalità finestra - sottrai spazio per bordi e barra applicazioni
+        int window_width = width;
+        int window_height = height - 60; // Sottrai spazio per barra applicazioni
+        
+        // Centra la finestra
+        GLFWmonitor* monitor = glfwGetPrimaryMonitor();
+        const GLFWvidmode* mode = glfwGetVideoMode(monitor);
+        int xpos = (mode->width - window_width) / 2;
+        int ypos = (mode->height - window_height) / 2;
+        
+        glfwSetWindowMonitor(window_ptr, nullptr, xpos, ypos, window_width, window_height, 0);
+    }
+    
+    // Applica V-Sync
+    glfwSwapInterval(vsync ? 1 : 0);
+}
 
     void SettingsWindow::Render() {
         // Aggiorna le dimensioni della finestra in base al frame principale
@@ -560,6 +598,14 @@ namespace Gui {
             ImGui::Spacing();
             
             // Action buttons at the bottom
+            ImGui::SetCursorPosX(ImGui::GetWindowWidth() - 480);
+            if (ImGui::Button("Apply", ImVec2(100, 30))) {
+                ApplyDisplaySettings();
+                showNotification("Settings", "Display settings applied!", 2000);
+            }
+            ImGui::SameLine();
+
+
             ImGui::SetCursorPosX(ImGui::GetWindowWidth() - 360);
             if (ImGui::Button("Reset to Defaults", ImVec2(150, 30))) {
                 ImGui::OpenPopup("Reset Settings");
