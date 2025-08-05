@@ -178,7 +178,7 @@ private:
     void ResetToDefaults();
     
     void ApplyDisplaySettings();
-    
+
     // Current active tab
     int active_tab = 0;
     
@@ -227,6 +227,8 @@ public:
      */
     void Render() override;
     bool checked;
+    
+
 };
 
 class TabWindow : public Window {

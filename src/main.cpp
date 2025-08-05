@@ -46,6 +46,9 @@ ImGui_ImplOpenGL3_Init("#version 130");
 
 //calcolo width and height finestra in tempo reale
 int frame_width, frame_height;
+int menubar_height = 18;
+float bottombar_height = 35.0f;
+
 glfwGetFramebufferSize(frame_window_manager.getWindow(), &frame_width, &frame_height);
 GLFWwindow* frame_p = frame_window_manager.getWindow(); // pointer to the frame
 
@@ -54,15 +57,19 @@ Gui::MinimizeAndExitWindow minimize_and_exit_window(ImVec2(0,0),ImVec2(frame_wid
 Gui::LoginWindow loginWin(ImVec2(100, 100), ImVec2(500, 400), frame_p, flags_login_window);
 Gui::ShowMyWindow mywin(ImVec2(100, 100), ImVec2(500, 400), frame_p, flags_my_window); // classe loginWindow creata
 Gui::showDemoWindow demoWindow(ImVec2(400,400), ImVec2(200,200), frame_p,flags_demo_window);
-Gui::EsperimentiWindow esperimenti_window(ImVec2(300,300), ImVec2(200,200), frame_p,flags_esperimenti_window);
+
 Gui::Window1 window1(ImVec2(100, 100), ImVec2(500, 400), frame_p, flags_window1);
 Gui::MenuBar menubar(ImVec2(0,0), ImVec2(0,0), frame_p, flags_menu_bar);
-Gui::TabWindow tabWindow("TabWindow", ImVec2(100,100), ImVec2(500,400), frame_p, flags_tab_window);
-Gui::Tree tree("Tree", ImVec2(600,100), ImVec2(500,400), frame_p, flags_tree);
-Gui::Table table("Table", ImVec2(100,100), ImVec2(500,400), frame_p, flags_table);
-Gui::SettingsWindow settingsWindow(ImVec2(0,0 + menubar.GetPos().y), ImVec2(frame_window_manager.frame_window_width,frame_window_manager.frame_window_heigth - menubar.GetPos().y), frame_p, flags_settings);
-Gui::BottomBar bottomBar("BomboClap", ImVec2(500,500), ImVec2(frame_width, 35.0f), frame_p, flags_BottomBar);
+
+Gui::TabWindow tabWindow("TabWindow", ImVec2(0,18), ImVec2(frame_width/6,frame_window_manager.frame_window_heigth - bottombar_height - menubar_height), frame_p, flags_tab_window);
+Gui::Tree tree("Tree", ImVec2(frame_width/6,menubar_height), ImVec2(2*frame_width/6,400), frame_p, flags_tree);
+Gui::Table table("Table", ImVec2(3*frame_width/6,menubar_height), ImVec2(3*frame_width/6,400), frame_p, flags_table);
+Gui::EsperimentiWindow esperimenti_window(ImVec2(frame_width/6,400+18), ImVec2((5*frame_width/6),(frame_window_manager.frame_window_heigth -400 - menubar_height - bottombar_height)), frame_p,flags_esperimenti_window);
+
+
+Gui::BottomBar bottomBar("BottomBar", ImVec2(500,500), ImVec2(frame_width, 35.0f), frame_p, flags_BottomBar);
 Gui::HelpWindow helpWindow("Help", ImVec2(0,0 + menubar.GetPos().y), ImVec2(frame_window_manager.frame_window_width,frame_window_manager.frame_window_heigth - menubar.GetPos().y), frame_p, flags_HelpWindow);
+Gui::SettingsWindow settingsWindow(ImVec2(0,0 + menubar.GetPos().y), ImVec2(frame_window_manager.frame_window_width,frame_window_manager.frame_window_heigth - menubar.GetPos().y), frame_p, flags_settings);
 
 
 

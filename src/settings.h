@@ -52,7 +52,7 @@ extern bool bool_HelpWindow;
 
 // Settings window arrays for dropdown menus
 extern const char* languages[5];
-extern const char* resolutions[6];
+extern const char* resolutions[7];
 extern const char* antialiasing_options[5];
 extern const char* notification_positions[4];
 

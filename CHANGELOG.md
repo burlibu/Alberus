@@ -31,3 +31,7 @@
 ---
 
 ## Version 0.0.4
+
+## 5/8/2025
+
+- Sistemato l' intero schermo coprendolo con delle finestre

@@ -205,6 +205,8 @@ namespace Gui {
 
     }
     void EsperimentiWindow::Render() {
+        ImGui::SetNextWindowPos(pos, ImGuiCond_FirstUseEver);
+        ImGui::SetNextWindowSize(size, ImGuiCond_FirstUseEver);
         ImGui::Begin("Esperimenti", &bool_esperimenti_window, flags_esperimenti_window);
 
         // Input text
@@ -234,6 +236,8 @@ namespace Gui {
     }
 
     void Window1::Render() {
+    ImGui::SetNextWindowPos(pos, ImGuiCond_FirstUseEver);
+    ImGui::SetNextWindowSize(size, ImGuiCond_FirstUseEver);
     ImGui::Begin("Window1", &bool_window1, flags_window1);
 
     if (ImGui::Button("My button", ImVec2(100,100))) {
@@ -302,6 +306,8 @@ namespace Gui {
     : Window(title, pos, size, win, f) {}
 
     void TabWindow::Render(){
+        ImGui::SetNextWindowPos(pos, ImGuiCond_FirstUseEver);
+        ImGui::SetNextWindowSize(size, ImGuiCond_FirstUseEver);
         if (ImGui::Begin(title.c_str(), nullptr, flags_tab_window)) {
             if (ImGui::BeginTabBar("MyTabBar", ImGuiTabBarFlags_Reorderable)) {
                 // Tab fisso (non chiudibile)
@@ -339,6 +345,8 @@ namespace Gui {
     : Window(title, pos, size, win, f) {}
 
     void Tree::Render() {
+        ImGui::SetNextWindowPos(pos, ImGuiCond_FirstUseEver);
+        ImGui::SetNextWindowSize(size, ImGuiCond_FirstUseEver);
         ImGui::Begin(title.c_str(), nullptr, flags_tree);
         if (ImGui::TreeNode("Nodo Principale")) {
             ImGui::Text("Contenuto del nodo");
@@ -360,6 +368,8 @@ namespace Gui {
     : Window(title, pos, size, win, f) {}
 
     void Table::Render() {
+        ImGui::SetNextWindowPos(pos, ImGuiCond_FirstUseEver);
+        ImGui::SetNextWindowSize(size, ImGuiCond_FirstUseEver);
         ImGui::Begin(title.c_str(), nullptr, flags_table);
         if (ImGui::BeginTable("TabellaAvanzata", 3, flags_table)) {
             ImGui::TableSetupColumn("ID", ImGuiTableColumnFlags_DefaultSort);
@@ -428,8 +438,9 @@ namespace Gui {
         case 1: width = 1366; height = 768; break;
         case 2: width = 1600; height = 900; break;
         case 3: width = 1920; height = 1080; break;
-        case 4: width = 2560; height = 1440; break;
-        case 5: width = 3840; height = 2160; break;
+        case 4: width = 2550; height = 1400; break;
+        case 5: width = 2560; height = 1440; break;
+        case 6: width = 3840; height = 2160; break;
         default: width = 1920; height = 1080; break;
     }
     
@@ -654,8 +665,13 @@ namespace Gui {
         size = ImVec2(frame_current_width, height);
         ImGui::SetNextWindowPos(pos, ImGuiCond_Always);
         ImGui::SetNextWindowSize(size, ImGuiCond_Always);
-        ImGui::PushStyleColor(ImGuiCol_WindowBg, rosso);
+        ImGui::PushStyleColor(ImGuiCol_WindowBg, blu_oscuro);
         ImGui::Begin(title.c_str(), &bool_BottomBar , flags_BottomBar);
+        ImGui::PushStyleColor(ImGuiCol_Text, bianco);
+        ImGui::SetCursorPos(ImVec2(size.x - 120, size.y - 25));
+        std::string version_text = "version: " + version;
+        ImGui::TextUnformatted(version_text.c_str());
+        ImGui::PopStyleColor();
         ImGui::End();
         ImGui::PopStyleColor();
     }
